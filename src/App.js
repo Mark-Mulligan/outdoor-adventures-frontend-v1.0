@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+import { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import axios from 'axios';
+
+import LandingPage from './pages/LandingPage';
+import LoadingPage from './pages/LoadingPage';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [apiUp, setApiUp] = useState(false);
+
+  const checkApiOnline = useCallback(async () => {
+    try {
+      const response = await axios.get(`https://nationalparksbackend.herokuapp.com/api/testconnection`);
+      if (response.status === 200) {
+        setApiUp(true);
+      } else {
+        setApiUp(false);
+      }
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      setApiUp(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    checkApiOnline();
+  }, [checkApiOnline]);
+
+  return apiUp ? (
+    <BrowserRouter>
+      <Route exact path="/" component={LandingPage} />
+    </BrowserRouter>
+  ) : (
+    <LoadingPage />
   );
 }
 
