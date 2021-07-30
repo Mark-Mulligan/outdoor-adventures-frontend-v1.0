@@ -2,15 +2,19 @@ import PulseLoader from 'react-spinners/PulseLoader';
 import styled from 'styled-components';
 
 const LoadingContainer = styled.div`
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100vh;
+  background: url('./images/cliffsAndRoad.jpg');
+  background-size: cover;
+  padding-top: 30vh;
 `;
 
 const LoadingContent = styled.div`
   max-width: 700px;
   text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 `;
 
 const LoadingPage = () => {
