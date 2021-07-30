@@ -13,7 +13,7 @@ function App() {
     try {
       const response = await axios.get(`https://nationalparksbackend.herokuapp.com/api/testconnection`);
       if (response.status === 200) {
-        setApiUp(true);
+        setApiUp(false);
       } else {
         setApiUp(false);
       }
