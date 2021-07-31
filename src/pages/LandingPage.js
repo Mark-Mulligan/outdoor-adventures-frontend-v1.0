@@ -1,18 +1,11 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import OpaqueContainer from '../components/OpaqueContainer';
-
-const LandingPageBackground = styled.div`
-  height: 100vh;
-  background: url('./images/mountainForestBackground-min.jpg');
-  background-size: cover;
-  padding-top: 30vh;
-`;
+import FullPageBackground from '../components/FullPageBackground';
 
 const LandingPage = () => {
   return (
-    <LandingPageBackground>
+    <FullPageBackground backgroundImg="./images/mountainForestBackground-min.jpg" paddingTop="30vh">
       <OpaqueContainer maxWidth="650px">
         <h1>Outdoor Adventures</h1>
         <p>
@@ -23,7 +16,7 @@ const LandingPage = () => {
           Search Parks
         </Link>
       </OpaqueContainer>
-    </LandingPageBackground>
+    </FullPageBackground>
   );
 };
 

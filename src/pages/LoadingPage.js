@@ -1,18 +1,11 @@
 import PulseLoader from 'react-spinners/PulseLoader';
-import styled from 'styled-components';
 
 import OpaqueContainer from '../components/OpaqueContainer';
-
-const LoadingContainer = styled.div`
-  height: 100vh;
-  background: url('./images/cliffsAndRoad.jpg');
-  background-size: cover;
-  padding-top: 30vh;
-`;
+import FullPageBackground from '../components/FullPageBackground';
 
 const LoadingPage = () => {
   return (
-    <LoadingContainer>
+    <FullPageBackground backgroundImg="./images/cliffsAndRoad.jpg" paddingTop="30vh">
       <OpaqueContainer maxWidth="700px">
         <h2>
           If you see this screen, that means the application is loading. This should only happen once the first time you
@@ -22,7 +15,7 @@ const LoadingPage = () => {
           <PulseLoader />
         </div>
       </OpaqueContainer>
-    </LoadingContainer>
+    </FullPageBackground>
   );
 };
 
