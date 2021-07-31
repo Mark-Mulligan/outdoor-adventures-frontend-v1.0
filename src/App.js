@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import LandingPage from './pages/LandingPage';
 import LoadingPage from './pages/LoadingPage';
+import ParksPage from './pages/ParksPage';
 import './App.css';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
   return apiUp ? (
     <BrowserRouter>
       <Route exact path="/" component={LandingPage} />
+      <Route exact path="/parks" component={ParksPage} />
     </BrowserRouter>
   ) : (
     <LoadingPage />
