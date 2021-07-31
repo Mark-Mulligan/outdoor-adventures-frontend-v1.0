@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import TablePagination from './TablePagination';
+
 const CustomTableHead = styled.thead`
   background: black;
   color: white;
@@ -23,29 +25,32 @@ const renderCells = (item, rowIndex, columns) => {
   });
 };
 
-const Table = ({ columns, data }) => {
+const Table = ({ columns, data, pagination }) => {
   return (
-    <table className="table">
-      <CustomTableHead>
-        <tr>
-          {columns.map((col) => (
-            <th scope="col" key={col.accessor}>
-              {col.name}
-            </th>
-          ))}
-        </tr>
-      </CustomTableHead>
+    <>
+      <table className="table mb-0">
+        <CustomTableHead>
+          <tr>
+            {columns.map((col) => (
+              <th scope="col" key={col.accessor}>
+                {col.name}
+              </th>
+            ))}
+          </tr>
+        </CustomTableHead>
 
-      <tbody>
-        {data.map((item, rowIndex) => {
-          return rowIndex % 2 === 0 ? (
-            <LightCustomTableRow key={`row-${rowIndex}`}>{renderCells(item, rowIndex, columns)}</LightCustomTableRow>
-          ) : (
-            <CustomTableRow key={`row-${rowIndex}`}>{renderCells(item, rowIndex, columns)}</CustomTableRow>
-          );
-        })}
-      </tbody>
-    </table>
+        <tbody>
+          {data.map((item, rowIndex) => {
+            return rowIndex % 2 === 0 ? (
+              <LightCustomTableRow key={`row-${rowIndex}`}>{renderCells(item, rowIndex, columns)}</LightCustomTableRow>
+            ) : (
+              <CustomTableRow key={`row-${rowIndex}`}>{renderCells(item, rowIndex, columns)}</CustomTableRow>
+            );
+          })}
+        </tbody>
+      </table>
+      {pagination && <TablePagination />}
+    </>
   );
 };
 
