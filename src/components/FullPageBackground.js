@@ -5,8 +5,10 @@ const FullPageBackground = styled.div`
   background-image: ${(props) => `url(${props.backgroundImg})` || 'green'};
   background-size: cover;
   overflow: auto;
-  padding-top: ${(props) => props.paddingTop || '5vh'};
-  padding-bottom: ${(props) => props.paddingBottom || '10px'};
+  padding-top: ${(props) => props.paddingTop || '0'};
+  padding-bottom: ${(props) => props.paddingBottom || '0'};
+  padding-left: 15px;
+  padding-right: 15px;
 `;
 
 export default FullPageBackground;
