@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import TableFilters from './TableFilters';
@@ -44,7 +45,23 @@ const Table = ({
   setCurrentPage,
   resultLimit,
   setResultLimit,
+  sortOrder,
+  setSortOrder,
 }) => {
+  const onTableColClick = (columnVal) => {
+    if (sortOrder === `${columnVal}-desc`) {
+      setSortOrder('');
+    } else if (sortOrder === `${columnVal}-asc`) {
+      setSortOrder(`${columnVal}-desc`);
+    } else {
+      setSortOrder(`${columnVal}-asc`);
+    }
+  };
+
+  useEffect(() => {
+    console.log(sortOrder);
+  }, [sortOrder]);
+
   return (
     <>
       {filters && (
@@ -61,7 +78,7 @@ const Table = ({
         <CustomTableHead>
           <tr>
             {columns.map((col) => (
-              <th scope="col" key={col.accessor}>
+              <th scope="col" key={col.accessor} onClick={() => onTableColClick(col.accessor)}>
                 {col.name}
               </th>
             ))}

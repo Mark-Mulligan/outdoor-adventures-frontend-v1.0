@@ -23,6 +23,7 @@ const ParksPage = () => {
   const [entryEnd, setEntryEnd] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [resultLimit, setResultLimit] = useState(10);
+  const [sortOrder, setSortOrder] = useState('');
 
   const getParksData = useCallback(async (page, limit, states, designation, parkQuery) => {
     let apiRequestStr = `https://nationalparksbackend.herokuapp.com/api/parks?page=${page}&limit=${limit}`;
@@ -77,6 +78,8 @@ const ParksPage = () => {
         setCurrentPage={setCurrentPage}
         resultLimit={resultLimit}
         setResultLimit={setResultLimit}
+        sortOrder={sortOrder}
+        setSortOrder={setSortOrder}
       />
     </FullPageBackground>
   );
