@@ -24,6 +24,10 @@ const LightCustomTableRow = styled(CustomTableRow)`
   background: rgba(205, 205, 205, 0.9);
 `;
 
+const NoBreakSpan = styled.span`
+  white-space: nowrap;
+`;
+
 const renderCells = (item, rowIndex, columns) => {
   return columns.map((col, colIndex) => {
     return <td key={`row-${rowIndex} col-${colIndex}`}>{item[col.accessor]}</td>;
@@ -82,13 +86,15 @@ const Table = ({
           <tr>
             {columns.map((col) => (
               <th scope="col" key={col.accessor} onClick={() => onTableColClick(col.accessor)}>
-                {col.name}
-                {sortOrder === `${col.accessor}-asc` && (
-                  <i className="fas fa-sort-down" style={{ marginLeft: '5px' }}></i>
-                )}
-                {sortOrder === `${col.accessor}-desc` && (
-                  <i className="fas fa-sort-up" style={{ marginLeft: '5px' }}></i>
-                )}
+                <NoBreakSpan>
+                  {col.name}
+                  {sortOrder === `${col.accessor}-asc` && (
+                    <i className="fas fa-sort-down" style={{ marginLeft: '5px' }}></i>
+                  )}
+                  {sortOrder === `${col.accessor}-desc` && (
+                    <i className="fas fa-sort-up" style={{ marginLeft: '5px' }}></i>
+                  )}
+                </NoBreakSpan>
               </th>
             ))}
           </tr>
