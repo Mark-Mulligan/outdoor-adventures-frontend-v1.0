@@ -5,6 +5,9 @@ import TableFilters from './TableFilters';
 import TablePagination from './TablePagination';
 
 const CustomTableHead = styled.thead`
+  :hover {
+    cursor: pointer;
+  }
   background: black;
   color: white;
 `;
@@ -80,6 +83,12 @@ const Table = ({
             {columns.map((col) => (
               <th scope="col" key={col.accessor} onClick={() => onTableColClick(col.accessor)}>
                 {col.name}
+                {sortOrder === `${col.accessor}-asc` && (
+                  <i className="fas fa-sort-down" style={{ marginLeft: '5px' }}></i>
+                )}
+                {sortOrder === `${col.accessor}-desc` && (
+                  <i className="fas fa-sort-up" style={{ marginLeft: '5px' }}></i>
+                )}
               </th>
             ))}
           </tr>

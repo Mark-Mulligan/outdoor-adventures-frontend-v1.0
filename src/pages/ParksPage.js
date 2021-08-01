@@ -25,11 +25,12 @@ const ParksPage = () => {
   const [resultLimit, setResultLimit] = useState(10);
   const [sortOrder, setSortOrder] = useState('');
 
-  const getParksData = useCallback(async (page, limit, states, designation, parkQuery) => {
+  const getParksData = useCallback(async (page, limit, states, designation, parkQuery, sortOrder) => {
     let apiRequestStr = `https://nationalparksbackend.herokuapp.com/api/parks?page=${page}&limit=${limit}`;
     if (states.length > 0) apiRequestStr += `&states=${states.join(',')}`;
     if (designation.length > 0) apiRequestStr += `&designation=${designation.join(',')}`;
     if (parkQuery) apiRequestStr += `&q=${parkQuery}`;
+    if (sortOrder) apiRequestStr += `&order=${sortOrder}`;
 
     try {
       const { data, status } = await axios.get(apiRequestStr);
@@ -51,8 +52,8 @@ const ParksPage = () => {
   };
 
   useEffect(() => {
-    getParksData(currentPage, resultLimit, states, designations, debouncedParkName);
-  }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName]);
+    getParksData(currentPage, resultLimit, states, designations, debouncedParkName, sortOrder);
+  }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 
   return (
     <FullPageBackground backgroundImg="./images/mountainForestBackground-min.jpg">
