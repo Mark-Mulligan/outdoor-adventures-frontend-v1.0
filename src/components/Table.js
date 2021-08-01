@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import TableFilters from './TableFilters';
 import TablePagination from './TablePagination';
 
 const CustomTableHead = styled.thead`
@@ -29,6 +30,15 @@ const Table = ({
   columns,
   data,
   pagination,
+  filters,
+  parkName,
+  setParkName,
+  debouncedParkName,
+  setDebouncedParkName,
+  states,
+  setStates,
+  designations,
+  setDesignations,
   totalResults,
   entryStart,
   entryEnd,
@@ -40,6 +50,15 @@ const Table = ({
 }) => {
   return (
     <>
+      {filters && (
+        <TableFilters
+          parkName={parkName}
+          setParkName={setParkName}
+          states={states}
+          setStates={setStates}
+          designations={setDesignations}
+        />
+      )}
       <table className="table mb-0">
         <CustomTableHead>
           <tr>

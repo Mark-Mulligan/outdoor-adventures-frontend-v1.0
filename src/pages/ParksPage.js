@@ -60,6 +60,15 @@ const ParksPage = () => {
         columns={columns}
         data={parkData}
         pagination
+        filters
+        parkName={parkName}
+        setParkName={setParkName}
+        debouncedParkName={debouncedParkName}
+        setDebouncedParkName={setDebouncedParkName}
+        states={states}
+        setStates={setStates}
+        designations={designations}
+        setDesignations={setDesignations}
         totalResults={totalResults}
         entryStart={entryStart}
         entryEnd={entryEnd}
