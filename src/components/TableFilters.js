@@ -1,8 +1,61 @@
+import { useMemo, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
 import { stateList, designationList, debounceFunction } from '../utils/uilt';
 
-const TableFilters = ({ parkName, onInputChange, onStateSelectChange, onDesignationSelectChange }) => {
+const TableFilters = ({
+  parkName,
+  setParkName,
+  setCurrentPage,
+  debouncedParkName,
+  setDebouncedParkName,
+  setStates,
+  setDesignations,
+}) => {
+  const debouncedSearch = useMemo(
+    () =>
+      debounceFunction((val) => {
+        Promise.resolve().then((res) => {
+          ReactDOM.unstable_batchedUpdates(() => {
+            setCurrentPage(1);
+            setDebouncedParkName(val);
+          });
+        });
+      }, 750),
+    [setDebouncedParkName, setCurrentPage],
+  );
+
+  const onInputChange = useCallback(
+    (e) => {
+      setParkName(e.target.value);
+      debouncedSearch(e.target.value);
+    },
+    [debouncedSearch, setParkName],
+  );
+
+  const onStateSelectChange = (inputData) => {
+    const result = [];
+    if (inputData.length >= 1) {
+      inputData.forEach((item) => {
+        result.push(item.value);
+      });
+    }
+    setCurrentPage(1);
+    setStates(result);
+  };
+
+  const onDesignationSelectChange = (inputData) => {
+    const result = [];
+    if (inputData.length >= 1) {
+      inputData.forEach((item) => {
+        result.push(item.value);
+      });
+    }
+    setCurrentPage(1);
+    setDesignations(result);
+  };
+
   return (
     <div className="row">
       <div className="col-md-4 col-12 mb-4">
