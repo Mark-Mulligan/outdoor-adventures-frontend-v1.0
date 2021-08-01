@@ -1,18 +1,10 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 
 import { stateList, designationList, debounceFunction } from '../utils/uilt';
 
-const TableFilters = ({
-  parkName,
-  setParkName,
-  setCurrentPage,
-  debouncedParkName,
-  setDebouncedParkName,
-  setStates,
-  setDesignations,
-}) => {
+const TableFilters = ({ parkName, setParkName, setCurrentPage, setDebouncedParkName, setStates, setDesignations }) => {
   const debouncedSearch = useMemo(
     () =>
       debounceFunction((val) => {
@@ -26,13 +18,10 @@ const TableFilters = ({
     [setDebouncedParkName, setCurrentPage],
   );
 
-  const onInputChange = useCallback(
-    (e) => {
-      setParkName(e.target.value);
-      debouncedSearch(e.target.value);
-    },
-    [debouncedSearch, setParkName],
-  );
+  const onInputChange = (e) => {
+    setParkName(e.target.value);
+    debouncedSearch(e.target.value);
+  };
 
   const onStateSelectChange = (inputData) => {
     const result = [];

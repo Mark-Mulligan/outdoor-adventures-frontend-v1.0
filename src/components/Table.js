@@ -33,11 +33,8 @@ const Table = ({
   filters,
   parkName,
   setParkName,
-  debouncedParkName,
   setDebouncedParkName,
-  states,
   setStates,
-  designations,
   setDesignations,
   totalResults,
   entryStart,
@@ -54,9 +51,10 @@ const Table = ({
         <TableFilters
           parkName={parkName}
           setParkName={setParkName}
-          states={states}
+          setCurrentPage={setCurrentPage}
+          setDebouncedParkName={setDebouncedParkName}
           setStates={setStates}
-          designations={setDesignations}
+          setDesignations={setDesignations}
         />
       )}
       <table className="table mb-0">
