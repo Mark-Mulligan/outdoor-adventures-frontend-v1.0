@@ -56,7 +56,19 @@ const ParksPage = () => {
   return (
     <FullPageBackground backgroundImg="./images/mountainForestBackground-min.jpg">
       <h1>Parks Page</h1>
-      <Table columns={columns} data={parkData} pagination />
+      <Table
+        columns={columns}
+        data={parkData}
+        pagination
+        totalResults={totalResults}
+        entryStart={entryStart}
+        entryEnd={entryEnd}
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        resultLimit={resultLimit}
+        setResultLimit={setResultLimit}
+      />
     </FullPageBackground>
   );
 };

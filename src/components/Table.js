@@ -25,7 +25,19 @@ const renderCells = (item, rowIndex, columns) => {
   });
 };
 
-const Table = ({ columns, data, pagination }) => {
+const Table = ({
+  columns,
+  data,
+  pagination,
+  totalResults,
+  entryStart,
+  entryEnd,
+  totalPages,
+  currentPage,
+  setCurrentPage,
+  resultLimit,
+  setResultLimit,
+}) => {
   return (
     <>
       <table className="table mb-0">
@@ -49,7 +61,18 @@ const Table = ({ columns, data, pagination }) => {
           })}
         </tbody>
       </table>
-      {pagination && <TablePagination />}
+      {pagination && (
+        <TablePagination
+          totalResults={totalResults}
+          entryStart={entryStart}
+          entryEnd={entryEnd}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          resultLimit={resultLimit}
+          setResultLimit={setResultLimit}
+        />
+      )}
     </>
   );
 };
