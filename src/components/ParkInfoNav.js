@@ -1,33 +1,66 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const ParkNavLinksContainer = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const ParkNavLink = styled.a`
+  :hover {
+    color: grey;
+  }
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+`;
+
+const ParkBackLink = styled(Link)`
+  :hover {
+    color: grey;
+  }
+  text-align: center;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+`;
 
 const ParkInfoNav = () => {
   return (
     <nav>
-      <ul>
+      <ParkNavLinksContainer>
         <li className="back-link">
-          <Link to="/parks">
+          <ParkBackLink to="/parks">
             <i className="fas fa-sm fa-arrow-left"></i> Back to parks
-          </Link>
+          </ParkBackLink>
         </li>
         <li>
-          <a href="#description">Description</a>
+          <ParkNavLink href="#description">Description</ParkNavLink>
         </li>
         <li>
-          <a href="#entrance-fees">Entrance Fees</a>
+          <ParkNavLink href="#entrance-fees">Entrance Fees</ParkNavLink>
         </li>
         <li>
-          <a href="#hours">Hours</a>
+          <ParkNavLink href="#hours">Hours</ParkNavLink>
         </li>
         <li>
-          <a href="#activites">Actvities</a>
+          <ParkNavLink href="#activites">Actvities</ParkNavLink>
         </li>
         <li>
-          <a href="#contact">Contact Info</a>
+          <ParkNavLink href="#contact">Contact Info</ParkNavLink>
         </li>
         <li>
-          <a href="#photos">Photos</a>
+          <ParkNavLink href="#photos">Photos</ParkNavLink>
         </li>
-      </ul>
+      </ParkNavLinksContainer>
     </nav>
   );
 };
