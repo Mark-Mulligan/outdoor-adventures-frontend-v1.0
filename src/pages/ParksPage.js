@@ -11,7 +11,7 @@ const columns = [
   { name: 'Designation', accessor: 'designation' },
 ];
 
-const ParksPage = () => {
+const ParksPage = ({ history }) => {
   const [parkData, setParkData] = useState([]);
   const [designations, setDesignations] = useState([]);
   const [states, setStates] = useState([]);
@@ -59,6 +59,7 @@ const ParksPage = () => {
     <FullPageBackground backgroundImg="./images/mountainForestBackground-min.jpg">
       <h1>Parks Page</h1>
       <Table
+        history={history}
         columns={columns}
         data={parkData}
         pagination

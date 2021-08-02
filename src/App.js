@@ -5,6 +5,7 @@ import axios from 'axios';
 import LandingPage from './pages/LandingPage';
 import LoadingPage from './pages/LoadingPage';
 import ParksPage from './pages/ParksPage';
+import ParkPage from './pages/ParkPage';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
     <BrowserRouter>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/parks" component={ParksPage} />
+      <Route exact path="/parks/:parkcode" component={ParkPage} />
     </BrowserRouter>
   ) : (
     <LoadingPage />

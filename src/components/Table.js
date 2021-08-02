@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import TableFilters from './TableFilters';
@@ -35,6 +34,7 @@ const renderCells = (item, rowIndex, columns) => {
 };
 
 const Table = ({
+  history,
   columns,
   data,
   pagination,
@@ -65,9 +65,9 @@ const Table = ({
     }
   };
 
-  useEffect(() => {
-    console.log(sortOrder);
-  }, [sortOrder]);
+  const onTableRowClick = (parkcode) => {
+    history.push(`/parks/${parkcode}`);
+  };
 
   return (
     <>
@@ -103,9 +103,13 @@ const Table = ({
         <tbody>
           {data.map((item, rowIndex) => {
             return rowIndex % 2 === 0 ? (
-              <LightCustomTableRow key={`row-${rowIndex}`}>{renderCells(item, rowIndex, columns)}</LightCustomTableRow>
+              <LightCustomTableRow onClick={() => onTableRowClick(item.parkcode)} key={`row-${rowIndex}`}>
+                {renderCells(item, rowIndex, columns)}
+              </LightCustomTableRow>
             ) : (
-              <CustomTableRow key={`row-${rowIndex}`}>{renderCells(item, rowIndex, columns)}</CustomTableRow>
+              <CustomTableRow onClick={() => onTableRowClick(item.parkcode)} key={`row-${rowIndex}`}>
+                {renderCells(item, rowIndex, columns)}
+              </CustomTableRow>
             );
           })}
         </tbody>
