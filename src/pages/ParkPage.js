@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import FullPageBackground from '../components/FullPageBackground';
+import ParkInfoNav from '../components/ParkInfoNav';
 
 const ParkInfoContainer = styled.div`
   background: rgba(255, 255, 255, 0.9);
@@ -16,9 +17,7 @@ const ParkPage = () => {
   return (
     <FullPageBackground backgroundImg={mountainBackground}>
       <ParkInfoContainer>
-        <div>
-          <h1>Nav Section</h1>
-        </div>
+        <ParkInfoNav />
         <div style={{ overflow: 'auto' }}>
           <h1>Park Data will go here</h1>
           <p>
