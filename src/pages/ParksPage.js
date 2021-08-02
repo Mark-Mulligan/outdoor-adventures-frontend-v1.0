@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
+import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
 import FullPageBackground from '../components/FullPageBackground';
 
@@ -56,7 +57,7 @@ const ParksPage = ({ history }) => {
   }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 
   return (
-    <FullPageBackground backgroundImg="./images/mountainForestBackground-min.jpg">
+    <FullPageBackground backgroundImg={mountainBackground}>
       <h1>Parks Page</h1>
       <Table
         history={history}
