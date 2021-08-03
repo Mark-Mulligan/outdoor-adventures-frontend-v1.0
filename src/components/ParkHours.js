@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import UnorderedListNoStyle from './UnorderedListNoStyle';
 import OrderedListNoStyle from './OrderedListNoStyle';
+import ParkInfoSection from './ParkInfoSection';
 
 const DaySpan = styled.span`
   display: inline-block;
@@ -21,7 +22,7 @@ const formatStartAndEndDate = (startDate, endDate) => {
 
 const Hours = ({ operatingHours }) => {
   return (
-    <section id="hours">
+    <ParkInfoSection id="hours">
       <h2>Operating Hours</h2>
       <hr />
 
@@ -65,7 +66,7 @@ const Hours = ({ operatingHours }) => {
           );
         })}
       </div>
-    </section>
+    </ParkInfoSection>
   );
 };
 

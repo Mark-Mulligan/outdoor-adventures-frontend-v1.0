@@ -1,10 +1,12 @@
+import ParkInfoSection from './ParkInfoSection';
+
 const Description = ({ parkDescription }) => {
   return (
-    <section id="description">
+    <ParkInfoSection id="description">
       <h2>Description</h2>
       <hr />
       <p>{parkDescription}</p>
-    </section>
+    </ParkInfoSection>
   );
 };
 

@@ -1,6 +1,8 @@
+import ParkInfoSection from './ParkInfoSection';
+
 const EntranceFees = ({ feeData }) => {
   return (
-    <section id="entrance-fees">
+    <ParkInfoSection id="entrance-fees">
       <h2>Entrance Fees</h2>
       <hr />
       {feeData.map((fee) => {
@@ -13,7 +15,7 @@ const EntranceFees = ({ feeData }) => {
           </div>
         );
       })}
-    </section>
+    </ParkInfoSection>
   );
 };
 
