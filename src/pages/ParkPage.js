@@ -1,3 +1,6 @@
+import { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
@@ -13,7 +16,19 @@ const ParkInfoContainer = styled.div`
   grid-template-columns: 300px auto;
 `;
 
-const ParkPage = () => {
+const ParkPage = ({ history }) => {
+  const [parkData, setParkData] = useState([]);
+  let { parkcode } = useParams();
+
+  const getParkData = useCallback(async () => {
+    const response = await axios.get(`https://nationalparksbackend.herokuapp.com/api/parks/${parkcode}`);
+    setParkData(response.data[0]);
+  }, [parkcode]);
+
+  useEffect(() => {
+    getParkData();
+  }, [getParkData]);
+
   return (
     <FullPageBackground backgroundImg={mountainBackground}>
       <ParkInfoContainer>

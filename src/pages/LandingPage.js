@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 
 import OpaqueContainer from '../components/OpaqueContainer';
 import FullPageBackground from '../components/FullPageBackground';
+import mountainBackground from '../images/mountainForestBackground-min.jpg';
 
 const LandingPage = () => {
   return (
-    <FullPageBackground backgroundImg="./images/mountainForestBackground-min.jpg" paddingTop="30vh">
+    <FullPageBackground backgroundImg={mountainBackground} paddingTop="30vh">
       <OpaqueContainer maxWidth="650px">
         <h1>Outdoor Adventures</h1>
         <p>
