@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ParkNavLinksContainer = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
+import UnorderedListNoStyle from './UnorderedListNoStyle';
 
 const ParkNavLink = styled.a`
   :hover {
@@ -36,7 +32,7 @@ const ParkBackLink = styled(Link)`
 const ParkInfoNav = () => {
   return (
     <nav>
-      <ParkNavLinksContainer>
+      <UnorderedListNoStyle>
         <li className="back-link">
           <ParkBackLink to="/parks">
             <i className="fas fa-sm fa-arrow-left"></i> Back to parks
@@ -60,7 +56,7 @@ const ParkInfoNav = () => {
         <li>
           <ParkNavLink href="#photos">Photos</ParkNavLink>
         </li>
-      </ParkNavLinksContainer>
+      </UnorderedListNoStyle>
     </nav>
   );
 };

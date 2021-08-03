@@ -7,6 +7,8 @@ import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import FullPageBackground from '../components/FullPageBackground';
 import ParkInfoNav from '../components/ParkInfoNav';
 import ParkDescription from '../components/ParkDescription';
+import EntranceFees from '../components/EntranceFees';
+import ParkHours from '../components/ParkHours';
 
 const ParkInfoContainer = styled.div`
   background: rgba(255, 255, 255, 0.9);
@@ -35,9 +37,11 @@ const ParkPage = ({ history }) => {
     <FullPageBackground backgroundImg={mountainBackground}>
       <ParkInfoContainer>
         <ParkInfoNav />
-        <div style={{ overflow: 'auto' }}>
-          <h1>Park Data will go here</h1>
+        <div style={{ overflow: 'auto', paddingLeft: '15px', paddingRight: '15px' }}>
+          {parkData.fullName && <h1>{parkData.fullName}</h1>}
           {parkData.description && <ParkDescription parkDescription={parkData.description} />}
+          {parkData.entranceFees && <EntranceFees feeData={parkData.entranceFees} />}
+          {parkData.operatingHours && <ParkHours operatingHours={parkData.operatingHours} />}
           <h1>Park Data will go here</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
