@@ -11,6 +11,7 @@ import EntranceFees from '../components/EntranceFees';
 import ParkHours from '../components/ParkHours';
 import Actvities from '../components/Activites';
 import Contact from '../components/Contact';
+import ParkPhotos from '../components/ParkPhotos';
 
 const ParkInfoContainer = styled.div`
   background: rgba(255, 255, 255, 0.9);
@@ -46,6 +47,7 @@ const ParkPage = ({ history }) => {
           {parkData.operatingHours && <ParkHours operatingHours={parkData.operatingHours} />}
           {parkData.activities && <Actvities activities={parkData.activities} />}
           {parkData.contacts && <Contact contactInfo={parkData.contacts} websiteUrl={parkData.url} />}
+          {parkData.images && <ParkPhotos photos={parkData?.images} />}
         </div>
       </ParkInfoContainer>
     </FullPageBackground>
