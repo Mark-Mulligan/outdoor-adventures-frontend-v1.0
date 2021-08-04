@@ -21,6 +21,8 @@ const ParksPage = ({
   setStates,
   designations,
   setDesignations,
+  currentPage,
+  setCurrentPage,
   history,
 }) => {
   const [parkData, setParkData] = useState([]);
@@ -28,7 +30,6 @@ const ParksPage = ({
   const [totalPages, setTotalPages] = useState(0);
   const [entryStart, setEntryStart] = useState(0);
   const [entryEnd, setEntryEnd] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
   const [resultLimit, setResultLimit] = useState(10);
   const [sortOrder, setSortOrder] = useState('');
 
