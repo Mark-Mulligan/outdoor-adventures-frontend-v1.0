@@ -42,6 +42,7 @@ const Table = ({
   parkName,
   setParkName,
   setDebouncedParkName,
+  states,
   setStates,
   setDesignations,
   totalResults,
@@ -77,6 +78,7 @@ const Table = ({
           setParkName={setParkName}
           setCurrentPage={setCurrentPage}
           setDebouncedParkName={setDebouncedParkName}
+          states={states}
           setStates={setStates}
           setDesignations={setDesignations}
         />

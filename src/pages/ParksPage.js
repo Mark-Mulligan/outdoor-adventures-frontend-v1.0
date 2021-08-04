@@ -12,10 +12,9 @@ const columns = [
   { name: 'Designation', accessor: 'designation' },
 ];
 
-const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkName, history }) => {
+const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkName, states, setStates, history }) => {
   const [parkData, setParkData] = useState([]);
   const [designations, setDesignations] = useState([]);
-  const [states, setStates] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [entryStart, setEntryStart] = useState(0);
@@ -24,9 +23,19 @@ const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkN
   const [resultLimit, setResultLimit] = useState(10);
   const [sortOrder, setSortOrder] = useState('');
 
+  const removeValsFromStateObj = (inputData) => {
+    const result = [];
+    if (inputData.length >= 1) {
+      inputData.forEach((item) => {
+        result.push(item.value);
+      });
+    }
+    return result;
+  };
+
   const getParksData = useCallback(async (page, limit, states, designation, parkQuery, sortOrder) => {
     let apiRequestStr = `https://nationalparksbackend.herokuapp.com/api/parks?page=${page}&limit=${limit}`;
-    if (states.length > 0) apiRequestStr += `&states=${states.join(',')}`;
+    if (states.length > 0) apiRequestStr += `&states=${removeValsFromStateObj(states).join(',')}`;
     if (designation.length > 0) apiRequestStr += `&designation=${designation.join(',')}`;
     if (parkQuery) apiRequestStr += `&q=${parkQuery}`;
     if (sortOrder) apiRequestStr += `&order=${sortOrder}`;
@@ -54,7 +63,7 @@ const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkN
   useEffect(() => {
     getParksData(currentPage, resultLimit, states, designations, debouncedParkName, sortOrder);
     if (localStorage.hasOwnProperty('lastSearch')) {
-      console.log(JSON.parse(localStorage.getItem('lastSearch')));
+      //console.log(JSON.parse(localStorage.getItem('lastSearch')));
     }
   }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 

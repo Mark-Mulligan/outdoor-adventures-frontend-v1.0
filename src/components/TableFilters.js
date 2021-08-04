@@ -4,7 +4,15 @@ import Select from 'react-select';
 
 import { stateList, designationList, debounceFunction } from '../utils/uilt';
 
-const TableFilters = ({ parkName, setParkName, setCurrentPage, setDebouncedParkName, setStates, setDesignations }) => {
+const TableFilters = ({
+  parkName,
+  setParkName,
+  setCurrentPage,
+  setDebouncedParkName,
+  states,
+  setStates,
+  setDesignations,
+}) => {
   const debouncedSearch = useMemo(
     () =>
       debounceFunction((val) => {
@@ -24,14 +32,8 @@ const TableFilters = ({ parkName, setParkName, setCurrentPage, setDebouncedParkN
   };
 
   const onStateSelectChange = (inputData) => {
-    const result = [];
-    if (inputData.length >= 1) {
-      inputData.forEach((item) => {
-        result.push(item.value);
-      });
-    }
     setCurrentPage(1);
-    setStates(result);
+    setStates(inputData);
   };
 
   const onDesignationSelectChange = (inputData) => {
@@ -66,6 +68,7 @@ const TableFilters = ({ parkName, setParkName, setCurrentPage, setDebouncedParkN
           States Filter
         </label>
         <Select
+          value={states}
           name="states-select"
           placeholder="Filter by State(s)"
           options={stateList}
