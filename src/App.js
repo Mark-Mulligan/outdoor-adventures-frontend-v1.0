@@ -15,6 +15,7 @@ function App() {
   const [states, setStates] = useState([]);
   const [designations, setDesignations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [resultLimit, setResultLimit] = useState(10);
 
   const checkApiOnline = useCallback(async () => {
     try {
@@ -54,6 +55,8 @@ function App() {
             setDesignations={setDesignations}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
+            resultLimit={resultLimit}
+            setResultLimit={setResultLimit}
           />
         )}
       />

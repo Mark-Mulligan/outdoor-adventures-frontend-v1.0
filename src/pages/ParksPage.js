@@ -23,6 +23,8 @@ const ParksPage = ({
   setDesignations,
   currentPage,
   setCurrentPage,
+  resultLimit,
+  setResultLimit,
   history,
 }) => {
   const [parkData, setParkData] = useState([]);
@@ -30,7 +32,6 @@ const ParksPage = ({
   const [totalPages, setTotalPages] = useState(0);
   const [entryStart, setEntryStart] = useState(0);
   const [entryEnd, setEntryEnd] = useState(0);
-  const [resultLimit, setResultLimit] = useState(10);
   const [sortOrder, setSortOrder] = useState('');
 
   const removeValsFromSelectObj = (inputData) => {
@@ -78,7 +79,7 @@ const ParksPage = ({
   }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 
   return (
-    <FullPageBackground backgroundImg={mountainBackground}>
+    <FullPageBackground backgroundImg={mountainBackground} paddingBottom="15px">
       <h1>Parks Page</h1>
       <Table
         history={history}
