@@ -3,6 +3,10 @@ import styled from 'styled-components';
 
 import UnorderedListNoStyle from './UnorderedListNoStyle';
 
+const ParkNavContainer = styled.nav`
+  padding-top: 15px;
+`;
+
 const ParkNavLink = styled.a`
   :hover {
     color: grey;
@@ -26,12 +30,12 @@ const ParkBackLink = styled(Link)`
   text-decoration: none;
   padding-top: 10px;
   padding-bottom: 10px;
-  font-size: 20px;
+  font-size: 22px;
 `;
 
 const ParkInfoNav = () => {
   return (
-    <nav>
+    <ParkNavContainer>
       <UnorderedListNoStyle>
         <li className="back-link">
           <ParkBackLink to="/parks">
@@ -57,7 +61,7 @@ const ParkInfoNav = () => {
           <ParkNavLink href="#photos">Photos</ParkNavLink>
         </li>
       </UnorderedListNoStyle>
-    </nav>
+    </ParkNavContainer>
   );
 };
 

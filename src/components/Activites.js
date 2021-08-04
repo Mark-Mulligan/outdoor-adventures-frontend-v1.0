@@ -1,6 +1,12 @@
+import styled from 'styled-components';
+
 import { sortObjByName } from '../utils/uilt';
 import UnorderedListNoStyle from './UnorderedListNoStyle';
 import ParkInfoSection from './ParkInfoSection';
+
+const ActivitiesListItem = styled.li`
+  margin-right: 1rem;
+`;
 
 const Actvities = ({ activities }) => {
   const returnSingleCol = () => {
@@ -26,15 +32,15 @@ const Actvities = ({ activities }) => {
     });
 
     return (
-      <UnorderedListNoStyle className="row">
+      <UnorderedListNoStyle className="row g-0">
         <div className="col">
           {listFirstHalf.map((activity) => {
-            return <li key={activity.id}>{activity.name}</li>;
+            return <ActivitiesListItem key={activity.id}>{activity.name}</ActivitiesListItem>;
           })}
         </div>
         <div className="col">
           {listSecondHalf.map((activity) => {
-            return <li key={activity.id}>{activity.name}</li>;
+            return <ActivitiesListItem key={activity.id}>{activity.name}</ActivitiesListItem>;
           })}
         </div>
       </UnorderedListNoStyle>

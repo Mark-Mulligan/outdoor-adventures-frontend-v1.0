@@ -22,6 +22,11 @@ const ParkInfoContainer = styled.div`
   grid-template-columns: 300px auto;
 `;
 
+const ParkInfo = styled.div`
+  overflow: auto;
+  padding: 15px;
+`;
+
 const ParkPage = ({ history }) => {
   const [parkData, setParkData] = useState([]);
   let { parkcode } = useParams();
@@ -40,7 +45,7 @@ const ParkPage = ({ history }) => {
     <FullPageBackground backgroundImg={mountainBackground}>
       <ParkInfoContainer>
         <ParkInfoNav />
-        <div style={{ overflow: 'auto', paddingLeft: '15px', paddingRight: '15px' }}>
+        <ParkInfo>
           {parkData.fullName && <h1>{parkData.fullName}</h1>}
           {parkData.description && <ParkDescription parkDescription={parkData.description} />}
           {parkData.entranceFees && <EntranceFees feeData={parkData.entranceFees} />}
@@ -48,7 +53,7 @@ const ParkPage = ({ history }) => {
           {parkData.activities && <Actvities activities={parkData.activities} />}
           {parkData.contacts && <Contact contactInfo={parkData.contacts} websiteUrl={parkData.url} />}
           {parkData.images && <ParkPhotos photos={parkData?.images} />}
-        </div>
+        </ParkInfo>
       </ParkInfoContainer>
     </FullPageBackground>
   );
