@@ -13,6 +13,7 @@ function App() {
   const [parkName, setParkName] = useState('');
   const [debouncedParkName, setDebouncedParkName] = useState('');
   const [states, setStates] = useState([]);
+  const [designations, setDesignations] = useState([]);
 
   const checkApiOnline = useCallback(async () => {
     try {
@@ -48,6 +49,8 @@ function App() {
             setDebouncedParkName={setDebouncedParkName}
             states={states}
             setStates={setStates}
+            designations={designations}
+            setDesignations={setDesignations}
           />
         )}
       />

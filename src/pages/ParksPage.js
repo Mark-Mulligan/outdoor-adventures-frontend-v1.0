@@ -12,9 +12,18 @@ const columns = [
   { name: 'Designation', accessor: 'designation' },
 ];
 
-const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkName, states, setStates, history }) => {
+const ParksPage = ({
+  parkName,
+  setParkName,
+  debouncedParkName,
+  setDebouncedParkName,
+  states,
+  setStates,
+  designations,
+  setDesignations,
+  history,
+}) => {
   const [parkData, setParkData] = useState([]);
-  const [designations, setDesignations] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [entryStart, setEntryStart] = useState(0);
@@ -23,7 +32,7 @@ const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkN
   const [resultLimit, setResultLimit] = useState(10);
   const [sortOrder, setSortOrder] = useState('');
 
-  const removeValsFromStateObj = (inputData) => {
+  const removeValsFromSelectObj = (inputData) => {
     const result = [];
     if (inputData.length >= 1) {
       inputData.forEach((item) => {
@@ -35,8 +44,8 @@ const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkN
 
   const getParksData = useCallback(async (page, limit, states, designation, parkQuery, sortOrder) => {
     let apiRequestStr = `https://nationalparksbackend.herokuapp.com/api/parks?page=${page}&limit=${limit}`;
-    if (states.length > 0) apiRequestStr += `&states=${removeValsFromStateObj(states).join(',')}`;
-    if (designation.length > 0) apiRequestStr += `&designation=${designation.join(',')}`;
+    if (states.length > 0) apiRequestStr += `&states=${removeValsFromSelectObj(states).join(',')}`;
+    if (designation.length > 0) apiRequestStr += `&designation=${removeValsFromSelectObj(designation).join(',')}`;
     if (parkQuery) apiRequestStr += `&q=${parkQuery}`;
     if (sortOrder) apiRequestStr += `&order=${sortOrder}`;
 

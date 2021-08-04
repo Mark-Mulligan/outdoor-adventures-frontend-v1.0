@@ -11,6 +11,7 @@ const TableFilters = ({
   setDebouncedParkName,
   states,
   setStates,
+  designations,
   setDesignations,
 }) => {
   const debouncedSearch = useMemo(
@@ -37,14 +38,8 @@ const TableFilters = ({
   };
 
   const onDesignationSelectChange = (inputData) => {
-    const result = [];
-    if (inputData.length >= 1) {
-      inputData.forEach((item) => {
-        result.push(item.value);
-      });
-    }
     setCurrentPage(1);
-    setDesignations(result);
+    setDesignations(inputData);
   };
 
   return (
@@ -81,6 +76,7 @@ const TableFilters = ({
           Designation Filters
         </label>
         <Select
+          value={designations}
           name="designation-select"
           placeholder="Filter by Deisgnation(s)"
           options={designationList}
