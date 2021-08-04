@@ -10,12 +10,19 @@ import './App.css';
 
 function App() {
   const [apiUp, setApiUp] = useState(false);
+  const [parkData, setParkData] = useState([]);
   const [parkName, setParkName] = useState('');
   const [debouncedParkName, setDebouncedParkName] = useState('');
   const [states, setStates] = useState([]);
   const [designations, setDesignations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [resultLimit, setResultLimit] = useState(10);
+  const [totalResults, setTotalResults] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [entryStart, setEntryStart] = useState(0);
+  const [entryEnd, setEntryEnd] = useState(0);
+  const [sortOrder, setSortOrder] = useState('');
+  const [lastSearchUrl, setLastSearchUrl] = useState('');
 
   const checkApiOnline = useCallback(async () => {
     try {
@@ -45,6 +52,8 @@ function App() {
         render={(props) => (
           <ParksPage
             {...props}
+            parkData={parkData}
+            setParkData={setParkData}
             parkName={parkName}
             setParkName={setParkName}
             debouncedParkName={debouncedParkName}
@@ -57,6 +66,18 @@ function App() {
             setCurrentPage={setCurrentPage}
             resultLimit={resultLimit}
             setResultLimit={setResultLimit}
+            totalResults={totalResults}
+            setTotalResults={setTotalResults}
+            totalPages={totalPages}
+            setTotalPages={setTotalPages}
+            entryStart={entryStart}
+            setEntryStart={setEntryStart}
+            entryEnd={entryEnd}
+            setEntryEnd={setEntryEnd}
+            sortOrder={sortOrder}
+            setSortOrder={setSortOrder}
+            lastSearchUrl={lastSearchUrl}
+            setLastSearchUrl={setLastSearchUrl}
           />
         )}
       />

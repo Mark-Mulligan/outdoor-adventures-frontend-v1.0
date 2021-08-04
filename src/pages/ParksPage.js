@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
@@ -13,6 +13,18 @@ const columns = [
 ];
 
 const ParksPage = ({
+  parkData,
+  setParkData,
+  totalResults,
+  setTotalResults,
+  totalPages,
+  setTotalPages,
+  entryStart,
+  setEntryStart,
+  entryEnd,
+  setEntryEnd,
+  sortOrder,
+  setSortOrder,
   parkName,
   setParkName,
   debouncedParkName,
@@ -25,15 +37,10 @@ const ParksPage = ({
   setCurrentPage,
   resultLimit,
   setResultLimit,
+  lastSearchUrl,
+  setLastSearchUrl,
   history,
 }) => {
-  const [parkData, setParkData] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [entryStart, setEntryStart] = useState(0);
-  const [entryEnd, setEntryEnd] = useState(0);
-  const [sortOrder, setSortOrder] = useState('');
-
   const removeValsFromSelectObj = (inputData) => {
     const result = [];
     if (inputData.length >= 1) {
@@ -44,38 +51,42 @@ const ParksPage = ({
     return result;
   };
 
-  const getParksData = useCallback(async (page, limit, states, designation, parkQuery, sortOrder) => {
-    let apiRequestStr = `https://nationalparksbackend.herokuapp.com/api/parks?page=${page}&limit=${limit}`;
-    if (states.length > 0) apiRequestStr += `&states=${removeValsFromSelectObj(states).join(',')}`;
-    if (designation.length > 0) apiRequestStr += `&designation=${removeValsFromSelectObj(designation).join(',')}`;
-    if (parkQuery) apiRequestStr += `&q=${parkQuery}`;
-    if (sortOrder) apiRequestStr += `&order=${sortOrder}`;
+  const setTableData = useCallback(
+    (data) => {
+      setParkData(data.results);
+      setTotalResults(data.totalResults);
+      setEntryStart(data.dataStart);
+      setEntryEnd(data.dataEnd);
+      setTotalPages(data.totalPages);
+    },
+    [setParkData, setTotalResults, setEntryStart, setEntryEnd, setTotalPages],
+  );
 
-    try {
-      const { data, status } = await axios.get(apiRequestStr);
-      if (status === 200) {
-        setTableData(data);
-        localStorage.setItem('lastSearchData', JSON.stringify(data));
-        console.log(data);
+  const getParksData = useCallback(
+    async (page, limit, states, designation, parkQuery, sortOrder) => {
+      let apiRequestStr = `https://nationalparksbackend.herokuapp.com/api/parks?page=${page}&limit=${limit}`;
+      if (states.length > 0) apiRequestStr += `&states=${removeValsFromSelectObj(states).join(',')}`;
+      if (designation.length > 0) apiRequestStr += `&designation=${removeValsFromSelectObj(designation).join(',')}`;
+      if (parkQuery) apiRequestStr += `&q=${parkQuery}`;
+      if (sortOrder) apiRequestStr += `&order=${sortOrder}`;
+
+      if (apiRequestStr !== lastSearchUrl) {
+        try {
+          const { data, status } = await axios.get(apiRequestStr);
+          if (status === 200) {
+            setTableData(data);
+            setLastSearchUrl(apiRequestStr);
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  const setTableData = (data) => {
-    setParkData(data.results);
-    setTotalResults(data.totalResults);
-    setEntryStart(data.dataStart);
-    setEntryEnd(data.dataEnd);
-    setTotalPages(data.totalPages);
-  };
+    },
+    [setTableData, setLastSearchUrl, lastSearchUrl],
+  );
 
   useEffect(() => {
     getParksData(currentPage, resultLimit, states, designations, debouncedParkName, sortOrder);
-    if (localStorage.hasOwnProperty('lastSearch')) {
-      //console.log(JSON.parse(localStorage.getItem('lastSearch')));
-    }
   }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 
   return (
