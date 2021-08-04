@@ -12,12 +12,10 @@ const columns = [
   { name: 'Designation', accessor: 'designation' },
 ];
 
-const ParksPage = ({ history }) => {
+const ParksPage = ({ parkName, setParkName, debouncedParkName, setDebouncedParkName, history }) => {
   const [parkData, setParkData] = useState([]);
   const [designations, setDesignations] = useState([]);
   const [states, setStates] = useState([]);
-  const [parkName, setParkName] = useState('');
-  const [debouncedParkName, setDebouncedParkName] = useState('');
   const [totalResults, setTotalResults] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [entryStart, setEntryStart] = useState(0);
@@ -38,9 +36,6 @@ const ParksPage = ({ history }) => {
       if (status === 200) {
         setTableData(data);
         localStorage.setItem('lastSearchData', JSON.stringify(data));
-        localStorage.setItem('lastParkName', debouncedParkName);
-        localStorage.setItem('lastStatesFilter', states);
-        localStorage.setItem('lastDesignationFilter', designations);
         console.log(data);
       }
     } catch (error) {
@@ -60,9 +55,6 @@ const ParksPage = ({ history }) => {
     getParksData(currentPage, resultLimit, states, designations, debouncedParkName, sortOrder);
     if (localStorage.hasOwnProperty('lastSearch')) {
       console.log(JSON.parse(localStorage.getItem('lastSearch')));
-      console.log(localStorage.getItem('lastParkName'));
-      console.log(localStorage.getItem('lastStatesFilter'));
-      console.log(localStorage.getItem('lastDesingationFilter'));
     }
   }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 

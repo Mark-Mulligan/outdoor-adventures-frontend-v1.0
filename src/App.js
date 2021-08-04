@@ -10,6 +10,8 @@ import './App.css';
 
 function App() {
   const [apiUp, setApiUp] = useState(false);
+  const [parkName, setParkName] = useState('');
+  const [debouncedParkName, setDebouncedParkName] = useState('');
 
   const checkApiOnline = useCallback(async () => {
     try {
@@ -33,7 +35,19 @@ function App() {
   return apiUp ? (
     <BrowserRouter>
       <Route exact path="/" component={LandingPage} />
-      <Route exact path="/parks" component={ParksPage} />
+      <Route
+        exact
+        path="/parks"
+        render={(props) => (
+          <ParksPage
+            {...props}
+            parkName={parkName}
+            setParkName={setParkName}
+            debouncedParkName={debouncedParkName}
+            setDebouncedParkName={setDebouncedParkName}
+          />
+        )}
+      />
       <Route exact path="/parks/:parkcode" component={ParkPage} />
     </BrowserRouter>
   ) : (
