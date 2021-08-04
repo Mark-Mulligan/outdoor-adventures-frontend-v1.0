@@ -37,6 +37,10 @@ const ParksPage = ({ history }) => {
       const { data, status } = await axios.get(apiRequestStr);
       if (status === 200) {
         setTableData(data);
+        localStorage.setItem('lastSearchData', JSON.stringify(data));
+        localStorage.setItem('lastParkName', debouncedParkName);
+        localStorage.setItem('lastStatesFilter', states);
+        localStorage.setItem('lastDesignationFilter', designations);
         console.log(data);
       }
     } catch (error) {
@@ -54,6 +58,12 @@ const ParksPage = ({ history }) => {
 
   useEffect(() => {
     getParksData(currentPage, resultLimit, states, designations, debouncedParkName, sortOrder);
+    if (localStorage.hasOwnProperty('lastSearch')) {
+      console.log(JSON.parse(localStorage.getItem('lastSearch')));
+      console.log(localStorage.getItem('lastParkName'));
+      console.log(localStorage.getItem('lastStatesFilter'));
+      console.log(localStorage.getItem('lastDesingationFilter'));
+    }
   }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 
   return (

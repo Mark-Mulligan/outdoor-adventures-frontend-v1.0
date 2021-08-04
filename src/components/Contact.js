@@ -33,7 +33,7 @@ const Contact = ({ contactInfo, websiteUrl }) => {
           <p>
             Website:{' '}
             <StyledLink href={websiteUrl} target="_blank" rel="noreferrer">
-              {websiteUrl} <i class="fas fa-xs fa-external-link-alt"></i>
+              {websiteUrl} <i className="fas fa-xs fa-external-link-alt"></i>
             </StyledLink>
           </p>
         </div>
