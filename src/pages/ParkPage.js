@@ -12,6 +12,7 @@ import ParkHours from '../components/ParkHours';
 import Actvities from '../components/Activites';
 import Contact from '../components/Contact';
 import ParkPhotos from '../components/ParkPhotos';
+import MobileParkNav from '../components/MoblieParkNav';
 
 const ParkInfoContainer = styled.div`
   background: rgba(255, 255, 255, 0.9);
@@ -20,6 +21,7 @@ const ParkInfoContainer = styled.div`
   border-radius: 10px;
   display: grid;
   grid-template-columns: 300px auto;
+  position: relative;
 `;
 
 const ParkInfo = styled.div`
@@ -42,7 +44,8 @@ const ParkPage = ({ history }) => {
   }, [getParkData]);
 
   return (
-    <FullPageBackground backgroundImg={mountainBackground}>
+    <FullPageBackground backgroundImg={mountainBackground} paddingTop="60px">
+      <MobileParkNav />
       <ParkInfoContainer>
         <ParkInfoNav />
         <ParkInfo>
