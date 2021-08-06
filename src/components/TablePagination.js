@@ -48,12 +48,12 @@ const TablePagination = ({
   return (
     <CustomTableFooter>
       <div className="row">
-        <div className="col d-flex align-items-center">
+        <div className="col-md-4 col-6 d-flex align-items-center">
           <label className="mb-0">
             Showing {entryStart} to {entryEnd} of {totalResults} results
           </label>
         </div>
-        <div className="col d-flex align-items-center justify-content-center">
+        <div className="col-md-4 col-6 d-flex align-items-center justify-content-center">
           <label htmlFor="results-per-page-select">Results Per Page:</label>
           <ResultsSelect
             id="results-per-page-select"
@@ -66,7 +66,10 @@ const TablePagination = ({
             <option value={50}>50</option>
           </ResultsSelect>
         </div>
-        <nav className="col d-flex align-items-center justify-content-end" aria-label="Table Page Navigation">
+        <nav
+          className="col-md-4 col-12 d-flex align-items-center justify-content-end"
+          aria-label="Table Page Navigation"
+        >
           <ul className="pagination mb-0">
             <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
               <button className="page-link" aria-label="Previous" onClick={() => setCurrentPage(currentPage - 1)}>
