@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import HamburgerMenu from 'react-hamburger-menu';
 
 const MobileParkNavContainer = styled.nav`
-  background: grey;
-  position: fixed;
+  background: rgba(220, 220, 220, 0.9);
+  position: relative;
   padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  top: 0;
-  left: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 1;
 `;
 
 const ExpandingNavLinks = styled.ul`
@@ -23,7 +22,7 @@ const ExpandingNavLinks = styled.ul`
   top: 100%;
   left: 0;
   width: 100%;
-  background: grey;
+  background: rgba(220, 220, 220, 0.9);
   transform: ${(props) => (props.open ? 'scaleY(1)' : 'scaleY(0)')};
   transform-origin: top;
   transition: transform 0.5s;
@@ -32,7 +31,7 @@ const ExpandingNavLinks = styled.ul`
 
 const NavLink = styled.a`
   :hover {
-    color: grey;
+    color: white;
   }
   text-align: center;
   color: inherit;
@@ -49,6 +48,7 @@ const BackLink = styled(Link)`
     cursor: pointer;
   }
   text-align: left;
+  text-decoration: none;
   display: block;
   color: inherit;
   font-size: 20px;
@@ -57,30 +57,46 @@ const BackLink = styled(Link)`
 const MobileParkNav = () => {
   const [navOpen, setNavOpen] = useState(false);
 
+  const handleMenuClick = () => {
+    setNavOpen(!navOpen);
+  };
+
   return (
     <MobileParkNavContainer>
       <BackLink to="/parks">
         <i className="fas fa-sm fa-arrow-left"></i> Back to parks
       </BackLink>
-      <div style={{ height: 25, width: 25, background: 'black' }} onClick={() => setNavOpen(!navOpen)}></div>
+      <HamburgerMenu width={24} height={20} isOpen={navOpen} menuClicked={handleMenuClick} />
       <ExpandingNavLinks open={navOpen}>
         <li>
-          <NavLink href="#description">Description</NavLink>
+          <NavLink href="#description" onClick={handleMenuClick}>
+            Description
+          </NavLink>
         </li>
         <li>
-          <NavLink href="#entrance-fees">Entrance Fees</NavLink>
+          <NavLink href="#entrance-fees" onClick={handleMenuClick}>
+            Entrance Fees
+          </NavLink>
         </li>
         <li>
-          <NavLink href="#hours">Hours</NavLink>
+          <NavLink href="#hours" onClick={handleMenuClick}>
+            Hours
+          </NavLink>
         </li>
         <li>
-          <NavLink href="#activites">Actvities</NavLink>
+          <NavLink href="#activites" onClick={handleMenuClick}>
+            Actvities
+          </NavLink>
         </li>
         <li>
-          <NavLink href="#contact">Contact Info</NavLink>
+          <NavLink href="#contact" onClick={handleMenuClick}>
+            Contact Info
+          </NavLink>
         </li>
         <li>
-          <NavLink href="#photos">Photos</NavLink>
+          <NavLink href="#photos" onClick={handleMenuClick}>
+            Photos
+          </NavLink>
         </li>
       </ExpandingNavLinks>
     </MobileParkNavContainer>
