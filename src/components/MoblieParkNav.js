@@ -24,8 +24,9 @@ const ExpandingNavLinks = styled.ul`
   left: 0;
   width: 100%;
   background: grey;
-  height: ${(props) => (props.open ? 'auto' : '0px')};
-  transition: height 1s ease-out;
+  transform: ${(props) => (props.open ? 'scaleY(1)' : 'scaleY(0)')};
+  transform-origin: top;
+  transition: transform 0.5s;
   overflow: hidden;
 `;
 
