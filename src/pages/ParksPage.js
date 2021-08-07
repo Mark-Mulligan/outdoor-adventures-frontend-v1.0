@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
@@ -11,6 +12,12 @@ const columns = [
   { name: 'State(s)', accessor: 'states' },
   { name: 'Designation', accessor: 'designation' },
 ];
+
+const TitleContainer = styled.div`
+  text-align: center;
+  margin-top: 10px;
+  color: rgba(255, 255, 255);
+`;
 
 const ParksPage = ({
   parkData,
@@ -91,7 +98,9 @@ const ParksPage = ({
 
   return (
     <FullPageBackground backgroundImg={mountainBackground} paddingBottom="15px">
-      <h1>Parks Page</h1>
+      <TitleContainer>
+        <h1>National Parks</h1>
+      </TitleContainer>
       <Table
         history={history}
         columns={columns}

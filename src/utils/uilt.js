@@ -105,3 +105,8 @@ export const sortObjByName = (a, b) => {
   if (nameA > nameB) return 1;
   return 0;
 };
+
+export const getWindowWidth = () => {
+  const { innerWidth } = window;
+  return innerWidth;
+};

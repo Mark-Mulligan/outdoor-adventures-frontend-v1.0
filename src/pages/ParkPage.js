@@ -13,6 +13,7 @@ import Actvities from '../components/Activites';
 import Contact from '../components/Contact';
 import ParkPhotos from '../components/ParkPhotos';
 import MobileParkNav from '../components/MoblieParkNav';
+import { getWindowWidth } from '../utils/uilt';
 
 const ParkInfoContainer = styled.div`
   background: rgba(255, 255, 255, 0.9);
@@ -42,18 +43,13 @@ const ParkInfo = styled.div`
   padding: 15px;
 `;
 
-const getWindowWidth = () => {
-  const { innerWidth } = window;
-  return innerWidth;
-};
-
 const setPadding = (screenWidth) => {
   if (screenWidth <= 500) return '0px';
   else if (screenWidth <= 900) return '15px';
   else return '30px';
 };
 
-const ParkPage = ({ history }) => {
+const ParkPage = () => {
   const [parkData, setParkData] = useState([]);
   const [windowWidth, setWindowWidth] = useState(getWindowWidth());
   let { parkcode } = useParams();

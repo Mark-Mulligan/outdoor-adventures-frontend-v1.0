@@ -1,16 +1,39 @@
 import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { getWindowWidth } from '../utils/uilt';
+
 const CustomTableFooter = styled.section`
   background: rgba(205, 205, 205, 0.9);
-  padding: 18px 15px;
   width: 100%;
+  min-width: 650px;
 `;
 
 const ResultsSelect = styled.select`
   max-width: 70px;
   display: inline-block;
   margin-left: 5px;
+`;
+
+const PaginationControlsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
+
+const Col1 = styled.div`
+  margin: 15px;
+  display: flex;
+  align-items: center;
+`;
+
+const Col2 = styled.div`
+  margin: 15px;
+`;
+
+const Col3 = styled.nav`
+  margin: 15px;
 `;
 
 const TablePagination = ({
@@ -24,6 +47,7 @@ const TablePagination = ({
   setResultLimit,
 }) => {
   const [pageBtnValues, setPageBtnValues] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
 
   const getPageBtnValues = useCallback(() => {
     if (totalPages > 7 && currentPage < 5) {
@@ -42,18 +66,26 @@ const TablePagination = ({
   }, [currentPage, totalPages]);
 
   useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(getWindowWidth());
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     getPageBtnValues();
   }, [totalPages, currentPage, getPageBtnValues]);
 
   return (
     <CustomTableFooter>
-      <div className="row">
-        <div className="col-md-4 col-6 d-flex align-items-center">
+      <PaginationControlsContainer>
+        <Col1>
           <label className="mb-0">
             Showing {entryStart} to {entryEnd} of {totalResults} results
           </label>
-        </div>
-        <div className="col-md-4 col-6 d-flex align-items-center justify-content-center">
+        </Col1>
+        <Col2 className="ml-2">
           <label htmlFor="results-per-page-select">Results Per Page:</label>
           <ResultsSelect
             id="results-per-page-select"
@@ -65,11 +97,8 @@ const TablePagination = ({
             <option value={25}>25</option>
             <option value={50}>50</option>
           </ResultsSelect>
-        </div>
-        <nav
-          className="col-md-4 col-12 d-flex align-items-center justify-content-end"
-          aria-label="Table Page Navigation"
-        >
+        </Col2>
+        <Col3 aria-label="Table Page Navigation">
           <ul className="pagination mb-0">
             <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
               <button className="page-link" aria-label="Previous" onClick={() => setCurrentPage(currentPage - 1)}>
@@ -107,8 +136,8 @@ const TablePagination = ({
               </button>
             </li>
           </ul>
-        </nav>
-      </div>
+        </Col3>
+      </PaginationControlsContainer>
     </CustomTableFooter>
   );
 };
