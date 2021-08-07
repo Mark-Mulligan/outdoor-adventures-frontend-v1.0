@@ -20,18 +20,35 @@ const PaginationControlsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const Col1 = styled.div`
+const Col = styled.div`
   margin: 15px;
+  @media (max-width: 390px) {
+    margin-left: 5px;
+  }
+`;
+
+const ColStyled = styled(Col)`
   display: flex;
   align-items: center;
 `;
 
-const Col2 = styled.div`
-  margin: 15px;
-`;
-
 const Col3 = styled.nav`
   margin: 15px;
+  @media (max-width: 390px) {
+    margin-left: 5px;
+  }
+`;
+
+const PaginationItem = styled.li`
+  display: flex;
+  align-items: center;
+  @media (max-width: 390px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 338px) {
+    font-size: 0.55rem;
+  }
 `;
 
 const TablePagination = ({
@@ -69,12 +86,12 @@ const TablePagination = ({
   return (
     <CustomTableFooter>
       <PaginationControlsContainer>
-        <Col1>
+        <ColStyled>
           <label className="mb-0">
             Showing {entryStart} to {entryEnd} of {totalResults} results
           </label>
-        </Col1>
-        <Col2 className="ml-2">
+        </ColStyled>
+        <Col className="ml-2">
           <label htmlFor="results-per-page-select">Results Per Page:</label>
           <ResultsSelect
             id="results-per-page-select"
@@ -86,44 +103,44 @@ const TablePagination = ({
             <option value={25}>25</option>
             <option value={50}>50</option>
           </ResultsSelect>
-        </Col2>
+        </Col>
         <Col3 aria-label="Table Page Navigation">
           <ul className="pagination mb-0">
-            <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
+            <PaginationItem className={`page-item ${currentPage === 1 && 'disabled'}`}>
               <button className="page-link" aria-label="Previous" onClick={() => setCurrentPage(currentPage - 1)}>
                 <span> &#60; </span>
                 <span className="visually-hidden">Previous</span>
               </button>
-            </li>
+            </PaginationItem>
             {pageBtnValues.map((value, index) => {
               if (value === currentPage) {
                 return (
-                  <li className="page-item active" key={`pagination-btn-${index}`}>
+                  <PaginationItem className="page-item active" key={`pagination-btn-${index}`}>
                     <button className="page-link">{value}</button>
-                  </li>
+                  </PaginationItem>
                 );
               } else if (value === '...') {
                 return (
-                  <li className="page-item disabled" key={`pagination-btn-${index}`}>
+                  <PaginationItem className="page-item disabled" key={`pagination-btn-${index}`}>
                     <button className="page-link">{value}</button>
-                  </li>
+                  </PaginationItem>
                 );
               } else {
                 return (
-                  <li className="page-item" key={`pagination-btn-${index}`}>
+                  <PaginationItem className="page-item" key={`pagination-btn-${index}`}>
                     <button onClick={() => setCurrentPage(value)} className="page-link">
                       {value}
                     </button>
-                  </li>
+                  </PaginationItem>
                 );
               }
             })}
-            <li className="page-item">
+            <PaginationItem className="page-item">
               <button className="page-link" aria-label="next" onClick={() => setCurrentPage(currentPage + 1)}>
                 <span> &#62; </span>
                 <span className="visually-hidden">Next</span>
               </button>
-            </li>
+            </PaginationItem>
           </ul>
         </Col3>
       </PaginationControlsContainer>
