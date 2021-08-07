@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import RingLoader from 'react-spinners/RingLoader';
 
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import FullPageBackground from '../components/FullPageBackground';
@@ -22,6 +23,8 @@ const ParkInfoContainer = styled.div`
   display: grid;
   grid-template-columns: 300px auto;
   position: relative;
+  max-width: 1500px;
+  margin: auto;
   @media (max-width: 900px) {
     display: block;
     overflow: auto;
@@ -43,6 +46,13 @@ const ParkInfo = styled.div`
   padding: 15px;
 `;
 
+const LoadingContainer = styled.div`
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const setPadding = (screenWidth) => {
   if (screenWidth <= 500) return '0px';
   else if (screenWidth <= 900) return '15px';
@@ -52,12 +62,14 @@ const setPadding = (screenWidth) => {
 const ParkPage = () => {
   const [parkData, setParkData] = useState([]);
   const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+  const [fetchingData, setFetchingData] = useState(false);
   let { parkcode } = useParams();
 
   const getParkData = useCallback(async () => {
+    setFetchingData(true);
     const response = await axios.get(`https://nationalparksbackend.herokuapp.com/api/parks/${parkcode}`);
     setParkData(response.data[0]);
-    console.log(response.data[0]);
+    setFetchingData(false);
   }, [parkcode]);
 
   useEffect(() => {
@@ -83,15 +95,26 @@ const ParkPage = () => {
       {windowWidth <= 900 && <MobileParkNav />}
       <ParkInfoContainer>
         {windowWidth > 900 && <ParkInfoNav />}
-        <ParkInfo>
-          {parkData.fullName && <ParkTitle>{parkData.fullName}</ParkTitle>}
-          {parkData.description && <ParkDescription parkDescription={parkData.description} />}
-          {parkData.entranceFees && <EntranceFees feeData={parkData.entranceFees} />}
-          {parkData.operatingHours && <ParkHours operatingHours={parkData.operatingHours} />}
-          {parkData.activities && <Actvities activities={parkData.activities} />}
-          {parkData.contacts && <Contact contactInfo={parkData.contacts} websiteUrl={parkData.url} />}
-          {parkData.images && <ParkPhotos photos={parkData?.images} />}
-        </ParkInfo>
+        {fetchingData ? (
+          <LoadingContainer>
+            <div>
+              <p>Loading Park Data...</p>
+              <div className="loading-spinner-wrapper">
+                <RingLoader size={150} />
+              </div>
+            </div>
+          </LoadingContainer>
+        ) : (
+          <ParkInfo>
+            {parkData.fullName && <ParkTitle>{parkData.fullName}</ParkTitle>}
+            {parkData.description && <ParkDescription parkDescription={parkData.description} />}
+            {parkData.entranceFees && <EntranceFees feeData={parkData.entranceFees} />}
+            {parkData.operatingHours && <ParkHours operatingHours={parkData.operatingHours} />}
+            {parkData.activities && <Actvities activities={parkData.activities} />}
+            {parkData.contacts && <Contact contactInfo={parkData.contacts} websiteUrl={parkData.url} />}
+            {parkData.images && <ParkPhotos photos={parkData?.images} />}
+          </ParkInfo>
+        )}
       </ParkInfoContainer>
     </FullPageBackground>
   );

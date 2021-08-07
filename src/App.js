@@ -32,7 +32,6 @@ function App() {
       } else {
         setApiUp(false);
       }
-      console.log(response);
     } catch (err) {
       console.log(err);
       setApiUp(false);
