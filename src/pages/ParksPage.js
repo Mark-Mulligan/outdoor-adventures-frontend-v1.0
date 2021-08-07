@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
 import FullPageBackground from '../components/FullPageBackground';
+import { formatTableData } from '../utils/uilt';
 
 const columns = [
   { name: 'Name', accessor: 'fullname' },
@@ -60,7 +61,7 @@ const ParksPage = ({
 
   const setTableData = useCallback(
     (data) => {
-      setParkData(data.results);
+      setParkData(formatTableData(data.results));
       setTotalResults(data.totalResults);
       setEntryStart(data.dataStart);
       setEntryEnd(data.dataEnd);

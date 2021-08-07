@@ -1,8 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { getWindowWidth } from '../utils/uilt';
-
 const CustomTableFooter = styled.section`
   background: rgba(205, 205, 205, 0.9);
   width: 100%;
@@ -47,7 +45,6 @@ const TablePagination = ({
   setResultLimit,
 }) => {
   const [pageBtnValues, setPageBtnValues] = useState([]);
-  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
 
   const getPageBtnValues = useCallback(() => {
     if (totalPages > 7 && currentPage < 5) {
@@ -64,14 +61,6 @@ const TablePagination = ({
       setPageBtnValues(result);
     }
   }, [currentPage, totalPages]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(getWindowWidth());
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     getPageBtnValues();

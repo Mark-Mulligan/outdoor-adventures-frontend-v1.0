@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import TableFilters from './TableFilters';
 import TablePagination from './TablePagination';
 
+const TableComponentContainer = styled.div`
+  max-width: 1500px;
+  margin: auto;
+`;
+
 const CustomTableHead = styled.thead`
   :hover {
     cursor: pointer;
@@ -72,7 +77,7 @@ const Table = ({
   };
 
   return (
-    <>
+    <TableComponentContainer>
       {filters && (
         <TableFilters
           parkName={parkName}
@@ -132,7 +137,7 @@ const Table = ({
           />
         )}
       </div>
-    </>
+    </TableComponentContainer>
   );
 };
 

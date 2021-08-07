@@ -98,6 +98,15 @@ export const formatPhoneNum = (phoneNum) => {
   return `${areaCode}-${threeDigits}-${fourDigits}`;
 };
 
+export const formatTableData = (tableData) => {
+  let formattedData = tableData.map((item) => {
+    let statesArr = item.states.split(',');
+    item.states = statesArr.join(', ');
+    return item;
+  });
+  return formattedData;
+};
+
 export const sortObjByName = (a, b) => {
   var nameA = a.name.toUpperCase(); // ignore upper and lowercase
   var nameB = b.name.toUpperCase(); // ignore upper and lowercase
