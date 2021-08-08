@@ -14,6 +14,7 @@ import Actvities from '../components/Activites';
 import Contact from '../components/Contact';
 import ParkPhotos from '../components/ParkPhotos';
 import MobileParkNav from '../components/MoblieParkNav';
+import Map from '../components/Map';
 import { getWindowWidth } from '../utils/uilt';
 
 const ParkInfoContainer = styled.div`
@@ -59,7 +60,7 @@ const setPadding = (screenWidth) => {
   else return '30px';
 };
 
-const ParkPage = () => {
+const ParkPage = ({ googleMapsKey }) => {
   const [parkData, setParkData] = useState([]);
   const [windowWidth, setWindowWidth] = useState(getWindowWidth());
   const [fetchingData, setFetchingData] = useState(false);
@@ -111,6 +112,13 @@ const ParkPage = () => {
             {parkData.entranceFees && <EntranceFees feeData={parkData.entranceFees} />}
             {parkData.operatingHours && <ParkHours operatingHours={parkData.operatingHours} />}
             {parkData.activities && <Actvities activities={parkData.activities} />}
+            {parkData.latitude && (
+              <Map
+                lat={parseFloat(parkData.latitude)}
+                lng={parseFloat(parkData.longitude)}
+                googleMapsKey={googleMapsKey}
+              />
+            )}
             {parkData.contacts && <Contact contactInfo={parkData.contacts} websiteUrl={parkData.url} />}
             {parkData.images && <ParkPhotos photos={parkData?.images} />}
           </ParkInfo>

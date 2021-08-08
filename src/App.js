@@ -10,6 +10,7 @@ import './App.css';
 
 function App() {
   const [apiUp, setApiUp] = useState(false);
+  const [googleMapsKey, setGoogleMapsKey] = useState('');
   const [parkData, setParkData] = useState([]);
   const [parkName, setParkName] = useState('');
   const [debouncedParkName, setDebouncedParkName] = useState('');
@@ -29,6 +30,8 @@ function App() {
       const response = await axios.get(`https://nationalparksbackend.herokuapp.com/api/testconnection`);
       if (response.status === 200) {
         setApiUp(true);
+        const apiKey = await axios.get(`https://nationalparksbackend.herokuapp.com/api/googlemaps`);
+        setGoogleMapsKey(apiKey.data.data);
       } else {
         setApiUp(false);
       }
@@ -80,7 +83,7 @@ function App() {
           />
         )}
       />
-      <Route exact path="/parks/:parkcode" component={ParkPage} />
+      <Route exact path="/parks/:parkcode" render={(props) => <ParkPage {...props} googleMapsKey={googleMapsKey} />} />
     </BrowserRouter>
   ) : (
     <LoadingPage />

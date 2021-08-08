@@ -55,6 +55,9 @@ const ParkInfoNav = () => {
           <ParkNavLink href="#activites">Actvities</ParkNavLink>
         </li>
         <li>
+          <ParkNavLink href="#location">Location</ParkNavLink>
+        </li>
+        <li>
           <ParkNavLink href="#contact">Contact Info</ParkNavLink>
         </li>
         <li>
