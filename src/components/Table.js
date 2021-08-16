@@ -15,6 +15,18 @@ const TableInstructions = styled.div`
   background: rgb(245, 245, 245);
   padding: 7px;
   border-radius: 5px;
+  position: relative;
+`;
+
+const InstructionsToggle = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background: none;
+  font-size: 20px;
+  padding-right: 5px;
+  padding-left: 5px;
 `;
 
 const CustomTableHead = styled.thead`
@@ -101,6 +113,7 @@ const Table = ({
       )}
 
       <TableInstructions>
+        <InstructionsToggle>&times;</InstructionsToggle>
         <p className="mb-0">Click on a park in the table to see detailed infomation .</p>
       </TableInstructions>
       <div style={{ overflow: 'auto' }}>
