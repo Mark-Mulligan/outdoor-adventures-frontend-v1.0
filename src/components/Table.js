@@ -8,6 +8,15 @@ const TableComponentContainer = styled.div`
   margin: auto;
 `;
 
+const TableInstructions = styled.div`
+  max-width: 700px;
+  margin: 0 auto 1.5rem auto;
+  text-align: center;
+  background: rgb(245, 245, 245);
+  padding: 7px;
+  border-radius: 5px;
+`;
+
 const CustomTableHead = styled.thead`
   :hover {
     cursor: pointer;
@@ -90,6 +99,10 @@ const Table = ({
           setDesignations={setDesignations}
         />
       )}
+
+      <TableInstructions>
+        <p className="mb-0">Click on a park in the table to see detailed infomation .</p>
+      </TableInstructions>
       <div style={{ overflow: 'auto' }}>
         <table className="table mb-0" style={{ minWidth: '650px' }}>
           <CustomTableHead>

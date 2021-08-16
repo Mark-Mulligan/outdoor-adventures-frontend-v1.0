@@ -31,7 +31,7 @@ const Hours = ({ operatingHours }) => {
           return (
             <div key={setOfHours.description} className="row">
               <h5 className="fst-italic mb-3">{setOfHours.description}</h5>
-              <div className="col">
+              <div className="col-sm-6 col-12 mb-3">
                 <h6 className="fw-bold">Standard Hours</h6>
                 <OrderedListNoStyle>
                   {days.map((day) => {
@@ -45,7 +45,7 @@ const Hours = ({ operatingHours }) => {
                 </OrderedListNoStyle>
               </div>
               {setOfHours.exceptions.length > 0 && (
-                <div className="col">
+                <div className="col-sm-6 col-12">
                   <h6 className="fw-bold">Holiday Hours</h6>
                   <UnorderedListNoStyle>
                     {setOfHours.exceptions.map((exception) => {
