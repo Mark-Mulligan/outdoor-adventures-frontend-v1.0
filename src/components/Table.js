@@ -9,6 +9,7 @@ const TableComponentContainer = styled.div`
 `;
 
 const TableInstructions = styled.div`
+  display: ${(props) => (props.showInstructions ? 'block' : 'none')};
   max-width: 700px;
   margin: 0 auto 1.5rem auto;
   text-align: center;
@@ -18,7 +19,7 @@ const TableInstructions = styled.div`
   position: relative;
 `;
 
-const InstructionsToggle = styled.div`
+const InstructionsToggle = styled.button`
   position: absolute;
   top: 0;
   right: 0;
@@ -63,6 +64,8 @@ const Table = ({
   history,
   columns,
   data,
+  showInstructions,
+  setShowInstructions,
   pagination,
   filters,
   parkName,
@@ -112,8 +115,8 @@ const Table = ({
         />
       )}
 
-      <TableInstructions>
-        <InstructionsToggle>&times;</InstructionsToggle>
+      <TableInstructions showInstructions={showInstructions}>
+        <InstructionsToggle onClick={() => setShowInstructions(!showInstructions)}>&times;</InstructionsToggle>
         <p className="mb-0">Click on a park in the table to see detailed infomation .</p>
       </TableInstructions>
       <div style={{ overflow: 'auto' }}>

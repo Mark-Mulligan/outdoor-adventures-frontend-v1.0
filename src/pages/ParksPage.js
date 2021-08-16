@@ -21,6 +21,8 @@ const TitleContainer = styled.div`
 `;
 
 const ParksPage = ({
+  showInstructions,
+  setShowInstructions,
   parkData,
   setParkData,
   totalResults,
@@ -106,6 +108,8 @@ const ParksPage = ({
         history={history}
         columns={columns}
         data={parkData}
+        showInstructions={showInstructions}
+        setShowInstructions={setShowInstructions}
         pagination
         filters
         parkName={parkName}

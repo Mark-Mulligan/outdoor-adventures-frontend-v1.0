@@ -10,6 +10,7 @@ import './App.css';
 
 function App() {
   const [apiUp, setApiUp] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(true);
   const [googleMapsKey, setGoogleMapsKey] = useState('');
   const [parkData, setParkData] = useState([]);
   const [parkName, setParkName] = useState('');
@@ -54,6 +55,8 @@ function App() {
         render={(props) => (
           <ParksPage
             {...props}
+            showInstructions={showInstructions}
+            setShowInstructions={setShowInstructions}
             parkData={parkData}
             setParkData={setParkData}
             parkName={parkName}
