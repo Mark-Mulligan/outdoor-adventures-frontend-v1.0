@@ -1,7 +1,9 @@
 import { useEffect, useCallback } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { setSearchResults } from '../redux/features/searchResults';
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
 import FullPageBackground from '../components/FullPageBackground';
@@ -51,6 +53,9 @@ const ParksPage = ({
   setLastSearchUrl,
   history,
 }) => {
+  const searchData = useSelector((state) => state.searchResults);
+  const dispatch = useDispatch();
+
   const removeValsFromSelectObj = (inputData) => {
     const result = [];
     if (inputData.length >= 1) {
@@ -83,9 +88,11 @@ const ParksPage = ({
       if (apiRequestStr !== lastSearchUrl) {
         try {
           const { data, status } = await axios.get(apiRequestStr);
+          console.log(data);
           if (status === 200) {
             setTableData(data);
             setLastSearchUrl(apiRequestStr);
+            dispatch(setSearchResults(data));
           }
         } catch (error) {
           console.log(error);

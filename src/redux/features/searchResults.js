@@ -1,13 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  results: [],
   currentPage: 1,
   resultLimit: 10,
   totalResults: 0,
   totalPages: 0,
-  entryStart: 0,
-  entryEnd: 0,
+  dataStart: 0,
+  dataEnd: 0,
 };
+
+/* setTotalResults(data.totalResults);
+      setEntryStart(data.dataStart);
+      setEntryEnd(data.dataEnd);
+      setTotalPages(data.totalPages); */
 
 export const searchResultsSlice = createSlice({
   name: 'searchResults',
@@ -22,10 +28,15 @@ export const searchResultsSlice = createSlice({
     jumpPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    setSearchResults: (state, action) => {
+      let newObj = { ...action.payload };
+      return newObj;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { nextPage, previousPage, jumpPage } = searchResultsSlice.actions;
+
+export const { setSearchResults } = searchResultsSlice.actions;
 
 export default searchResultsSlice.reducer;
