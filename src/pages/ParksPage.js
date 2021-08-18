@@ -31,7 +31,6 @@ const ParksPage = ({
   setParkName,
   debouncedParkName,
   setDebouncedParkName,
-  states,
   setStates,
   designations,
   setDesignations,
@@ -41,11 +40,10 @@ const ParksPage = ({
   setLastSearchUrl,
   history,
 }) => {
-  const { results, currentPage, totalPages, totalResults, dataStart, dataEnd } = useSelector(
+  const { results, currentPage, totalPages, totalResults, dataStart, dataEnd, resultLimit, states } = useSelector(
     (state) => state.searchResults,
   );
 
-  const { resultLimit } = useSelector((state) => state.searchParams);
   const dispatch = useDispatch();
 
   const removeValsFromSelectObj = (inputData) => {

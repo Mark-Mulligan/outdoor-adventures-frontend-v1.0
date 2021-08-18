@@ -7,6 +7,8 @@ const initialState = {
   totalPages: 0,
   dataStart: 0,
   dataEnd: 0,
+  resultLimit: 10,
+  states: [],
 };
 
 export const searchResultsSlice = createSlice({
@@ -23,8 +25,16 @@ export const searchResultsSlice = createSlice({
       state.currentPage = action.payload;
     },
     setSearchResults: (state, action) => {
-      let newObj = { ...action.payload };
-      return newObj;
+      state.results = action.payload.results;
+      state.currentPage = action.payload.currentPage;
+      state.totalResults = action.payload.totalResults;
+      state.totalPages = action.payload.totalPages;
+      state.dataStart = action.payload.dataStart;
+      state.dataEnd = action.payload.dataEnd;
+    },
+    setStatesFilter: (state, action) => {
+      state.states = action.payload;
+      state.currentPage = 1;
     },
   },
 });
