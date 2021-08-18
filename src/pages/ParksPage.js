@@ -27,7 +27,6 @@ const ParksPage = ({
   setShowInstructions,
   parkData,
   setParkData,
-  totalResults,
   setTotalResults,
   totalPages,
   setTotalPages,
@@ -45,15 +44,15 @@ const ParksPage = ({
   setStates,
   designations,
   setDesignations,
-  currentPage,
   setCurrentPage,
-  resultLimit,
   setResultLimit,
   lastSearchUrl,
   setLastSearchUrl,
   history,
 }) => {
-  const searchData = useSelector((state) => state.searchResults);
+  const { results, currentPage, resultLimit, totalResults, dataStart, dataEnd } = useSelector(
+    (state) => state.searchResults,
+  );
   const dispatch = useDispatch();
 
   const removeValsFromSelectObj = (inputData) => {
@@ -90,7 +89,7 @@ const ParksPage = ({
           const { data, status } = await axios.get(apiRequestStr);
           console.log(data);
           if (status === 200) {
-            setTableData(data);
+            //setTableData(data);
             setLastSearchUrl(apiRequestStr);
             dispatch(setSearchResults(data));
           }
@@ -114,7 +113,7 @@ const ParksPage = ({
       <Table
         history={history}
         columns={columns}
-        data={parkData}
+        data={results}
         showInstructions={showInstructions}
         setShowInstructions={setShowInstructions}
         pagination
@@ -128,8 +127,8 @@ const ParksPage = ({
         designations={designations}
         setDesignations={setDesignations}
         totalResults={totalResults}
-        entryStart={entryStart}
-        entryEnd={entryEnd}
+        entryStart={dataStart}
+        entryEnd={dataEnd}
         totalPages={totalPages}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
