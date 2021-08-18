@@ -25,15 +25,7 @@ const TitleContainer = styled.div`
 const ParksPage = ({
   showInstructions,
   setShowInstructions,
-  parkData,
-  setParkData,
-  setTotalResults,
   totalPages,
-  setTotalPages,
-  entryStart,
-  setEntryStart,
-  entryEnd,
-  setEntryEnd,
   sortOrder,
   setSortOrder,
   parkName,
@@ -65,17 +57,6 @@ const ParksPage = ({
     return result;
   };
 
-  const setTableData = useCallback(
-    (data) => {
-      setParkData(formatTableData(data.results));
-      setTotalResults(data.totalResults);
-      setEntryStart(data.dataStart);
-      setEntryEnd(data.dataEnd);
-      setTotalPages(data.totalPages);
-    },
-    [setParkData, setTotalResults, setEntryStart, setEntryEnd, setTotalPages],
-  );
-
   const getParksData = useCallback(
     async (page, limit, states, designation, parkQuery, sortOrder) => {
       let apiRequestStr = `https://nationalparksbackend.herokuapp.com/api/parks?page=${page}&limit=${limit}`;
@@ -89,7 +70,6 @@ const ParksPage = ({
           const { data, status } = await axios.get(apiRequestStr);
           console.log(data);
           if (status === 200) {
-            //setTableData(data);
             setLastSearchUrl(apiRequestStr);
             dispatch(setSearchResults(data));
           }
@@ -98,7 +78,7 @@ const ParksPage = ({
         }
       }
     },
-    [setTableData, setLastSearchUrl, lastSearchUrl],
+    [setLastSearchUrl, lastSearchUrl, dispatch],
   );
 
   useEffect(() => {
