@@ -9,6 +9,7 @@ const initialState = {
   dataEnd: 0,
   resultLimit: 10,
   states: [],
+  designations: [],
 };
 
 export const searchResultsSlice = createSlice({
@@ -36,11 +37,16 @@ export const searchResultsSlice = createSlice({
       state.states = action.payload;
       state.currentPage = 1;
     },
+    setDesignationsFilter: (state, action) => {
+      state.designations = action.payload;
+      state.currentPage = 1;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
 
-export const { nextPage, previousPage, jumpPage, setSearchResults } = searchResultsSlice.actions;
+export const { nextPage, previousPage, jumpPage, setSearchResults, setStatesFilter, setDesignationsFilter } =
+  searchResultsSlice.actions;
 
 export default searchResultsSlice.reducer;

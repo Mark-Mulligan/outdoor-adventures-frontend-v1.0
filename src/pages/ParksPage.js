@@ -32,7 +32,6 @@ const ParksPage = ({
   debouncedParkName,
   setDebouncedParkName,
   setStates,
-  designations,
   setDesignations,
   setCurrentPage,
   setResultLimit,
@@ -40,9 +39,8 @@ const ParksPage = ({
   setLastSearchUrl,
   history,
 }) => {
-  const { results, currentPage, totalPages, totalResults, dataStart, dataEnd, resultLimit, states } = useSelector(
-    (state) => state.searchResults,
-  );
+  const { results, currentPage, totalPages, totalResults, dataStart, dataEnd, resultLimit, states, designations } =
+    useSelector((state) => state.searchResults);
 
   const dispatch = useDispatch();
 

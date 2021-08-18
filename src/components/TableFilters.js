@@ -1,19 +1,14 @@
 import { useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
+import { useDispatch } from 'react-redux';
 
+import { setStatesFilter, setDesignationsFilter } from '../redux/features/searchResults';
 import { stateList, designationList, debounceFunction } from '../utils/uilt';
 
-const TableFilters = ({
-  parkName,
-  setParkName,
-  setCurrentPage,
-  setDebouncedParkName,
-  states,
-  setStates,
-  designations,
-  setDesignations,
-}) => {
+const TableFilters = ({ parkName, setParkName, setCurrentPage, setDebouncedParkName, states, designations }) => {
+  const dispatch = useDispatch();
+
   const debouncedSearch = useMemo(
     () =>
       debounceFunction((val) => {
@@ -33,13 +28,11 @@ const TableFilters = ({
   };
 
   const onStateSelectChange = (inputData) => {
-    setCurrentPage(1);
-    setStates(inputData);
+    dispatch(setStatesFilter(inputData));
   };
 
   const onDesignationSelectChange = (inputData) => {
-    setCurrentPage(1);
-    setDesignations(inputData);
+    dispatch(setDesignationsFilter(inputData));
   };
 
   return (
