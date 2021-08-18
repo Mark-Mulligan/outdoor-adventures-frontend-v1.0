@@ -59,7 +59,6 @@ const TablePagination = ({
   entryEnd,
   totalPages,
   currentPage,
-  setCurrentPage,
   resultLimit,
   setResultLimit,
 }) => {
