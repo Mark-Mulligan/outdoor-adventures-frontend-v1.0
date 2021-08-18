@@ -25,7 +25,6 @@ const TitleContainer = styled.div`
 const ParksPage = ({
   showInstructions,
   setShowInstructions,
-  totalPages,
   sortOrder,
   setSortOrder,
   parkName,
@@ -42,9 +41,11 @@ const ParksPage = ({
   setLastSearchUrl,
   history,
 }) => {
-  const { results, currentPage, resultLimit, totalResults, dataStart, dataEnd } = useSelector(
+  const { results, currentPage, totalPages, totalResults, dataStart, dataEnd } = useSelector(
     (state) => state.searchResults,
   );
+
+  const { resultLimit } = useSelector((state) => state.searchParams);
   const dispatch = useDispatch();
 
   const removeValsFromSelectObj = (inputData) => {

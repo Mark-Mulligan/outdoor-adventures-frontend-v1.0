@@ -1,5 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { nextPage, previousPage, jumpPage } from '../redux/features/searchResults';
 
 const CustomTableFooter = styled.section`
   background: rgba(205, 205, 205, 0.9);
@@ -63,6 +65,8 @@ const TablePagination = ({
 }) => {
   const [pageBtnValues, setPageBtnValues] = useState([]);
 
+  const dispatch = useDispatch();
+
   const getPageBtnValues = useCallback(() => {
     if (totalPages > 7 && currentPage < 5) {
       setPageBtnValues([1, 2, 3, 4, 5, '...', totalPages]);
@@ -108,7 +112,7 @@ const TablePagination = ({
         <Col3 aria-label="Table Page Navigation">
           <ul className="pagination mb-0">
             <PaginationItem className={`page-item ${currentPage === 1 && 'disabled'}`}>
-              <button className="page-link" aria-label="Previous" onClick={() => setCurrentPage(currentPage - 1)}>
+              <button className="page-link" aria-label="Previous" onClick={() => dispatch(previousPage())}>
                 <span> &#60; </span>
                 <span className="visually-hidden">Previous</span>
               </button>
@@ -129,7 +133,7 @@ const TablePagination = ({
               } else {
                 return (
                   <PaginationItem className="page-item" key={`pagination-btn-${index}`}>
-                    <button onClick={() => setCurrentPage(value)} className="page-link">
+                    <button onClick={() => dispatch(jumpPage(value))} className="page-link">
                       {value}
                     </button>
                   </PaginationItem>
@@ -137,7 +141,7 @@ const TablePagination = ({
               }
             })}
             <PaginationItem className="page-item">
-              <button className="page-link" aria-label="next" onClick={() => setCurrentPage(currentPage + 1)}>
+              <button className="page-link" aria-label="next" onClick={() => dispatch(nextPage())}>
                 <span> &#62; </span>
                 <span className="visually-hidden">Next</span>
               </button>
