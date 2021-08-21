@@ -1,41 +1,27 @@
-import React from 'react';
-import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps';
-import styled from 'styled-components';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 import ParkInfoSection from './ParkInfoSection';
 
-const MapContainer = styled.div`
-  height: 60vh;
-  width: 100%;
-`;
-
-const Map = ({ lat, lng }) => {
-  return (
-    <GoogleMap defaultZoom={5} defaultCenter={{ lat: lat, lng: lng }}>
-      <Marker position={{ lat: lat, lng: lng }} />
-    </GoogleMap>
-  );
+const mapContainerStyle = {
+  height: '60vh',
+  width: '100%',
 };
 
-const WrappedMap = withScriptjs(withGoogleMap(Map));
+const Map = ({ googleMapsKey, lat, lng }) => {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: googleMapsKey,
+  });
 
-const MapSection = ({ lat, lng, googleMapsKey }) => {
+  if (loadError) return 'Error loading maps';
+  if (!isLoaded) return 'Loading Maps';
+
   return (
     <ParkInfoSection id="location">
-      <h2>Location</h2>
-      <hr></hr>
-      <MapContainer>
-        <WrappedMap
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${googleMapsKey}`}
-          loadingElement={<div style={{ height: '100%' }} />}
-          containerElement={<div style={{ height: '100%' }} />}
-          mapElement={<div style={{ height: '100%' }} />}
-          lat={lat}
-          lng={lng}
-        />
-      </MapContainer>
+      <GoogleMap mapContainerStyle={mapContainerStyle} zoom={5} center={{ lat, lng }}>
+        <Marker position={{ lat, lng }} />
+      </GoogleMap>
     </ParkInfoSection>
   );
 };
 
-export default MapSection;
+export default Map;

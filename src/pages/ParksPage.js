@@ -82,7 +82,6 @@ const ParksPage = ({ showInstructions, setShowInstructions, history }) => {
       if (apiRequestStr !== lastApiRequestStr) {
         try {
           const { data, status } = await axios.get(apiRequestStr);
-          console.log(data);
           if (status === 200) {
             dispatch(setLastApiRequestStr(apiRequestStr));
             dispatch(setSearchResults(data));
