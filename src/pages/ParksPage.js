@@ -8,6 +8,7 @@ import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
 import TableFilters from '../components/TableFilters';
 import TablePagination from '../components/TablePagination';
+import ConfirmModal from '../components/ConfirmModal';
 
 import FullPageBackground from '../components/FullPageBackground';
 
@@ -29,29 +30,7 @@ const TableComponentContainer = styled.div`
   margin: auto;
 `;
 
-const TableInstructions = styled.div`
-  display: ${(props) => (props.showInstructions ? 'block' : 'none')};
-  max-width: 700px;
-  margin: 0 auto 1.5rem auto;
-  text-align: center;
-  background: rgb(245, 245, 245);
-  padding: 7px;
-  border-radius: 5px;
-  position: relative;
-`;
-
-const InstructionsToggle = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
-  background: none;
-  font-size: 20px;
-  padding-right: 5px;
-  padding-left: 5px;
-`;
-
-const ParksPage = ({ showInstructions, setShowInstructions, history }) => {
+const ParksPage = ({ history }) => {
   const {
     results,
     currentPage,
@@ -103,12 +82,9 @@ const ParksPage = ({ showInstructions, setShowInstructions, history }) => {
       <TitleContainer>
         <h1>National Parks</h1>
       </TitleContainer>
+
       <TableComponentContainer>
         <TableFilters debouncedParkName={debouncedParkName} states={states} designations={designations} />
-        <TableInstructions showInstructions={showInstructions}>
-          <InstructionsToggle onClick={() => setShowInstructions(!showInstructions)}>&times;</InstructionsToggle>
-          <p className="mb-0">Click on a park in the table to see detailed infomation .</p>
-        </TableInstructions>
         <div style={{ overflow: 'auto' }}>
           <Table
             history={history}
@@ -134,6 +110,8 @@ const ParksPage = ({ showInstructions, setShowInstructions, history }) => {
           />
         </div>
       </TableComponentContainer>
+
+      <ConfirmModal modalText="Click on a park in the table to see detailed infomation." btnText="Got It!" />
     </FullPageBackground>
   );
 };
