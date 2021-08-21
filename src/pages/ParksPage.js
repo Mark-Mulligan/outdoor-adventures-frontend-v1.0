@@ -7,7 +7,6 @@ import { setSearchResults } from '../redux/features/searchResults';
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
 import FullPageBackground from '../components/FullPageBackground';
-import { formatTableData } from '../utils/uilt';
 
 const columns = [
   { name: 'Name', accessor: 'fullname' },

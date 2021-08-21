@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { formatTableData } from '../../utils/uilt';
+
 const initialState = {
   results: [],
   currentPage: 1,
@@ -26,7 +28,7 @@ export const searchResultsSlice = createSlice({
       state.currentPage = action.payload;
     },
     setSearchResults: (state, action) => {
-      state.results = action.payload.results;
+      state.results = formatTableData(action.payload.results);
       state.currentPage = action.payload.currentPage;
       state.totalResults = action.payload.totalResults;
       state.totalPages = action.payload.totalPages;
