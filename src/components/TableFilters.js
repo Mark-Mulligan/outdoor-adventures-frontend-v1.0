@@ -1,25 +1,17 @@
-import { useMemo } from 'react';
-import ReactDOM from 'react-dom';
+import { useMemo, useState } from 'react';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
 
-import { setStatesFilter, setDesignationsFilter } from '../redux/features/searchResults';
+import { setStatesFilter, setDesignationsFilter, setDebouncedParkName } from '../redux/features/searchResults';
 import { stateList, designationList, debounceFunction } from '../utils/uilt';
 
-const TableFilters = ({ parkName, setParkName, setCurrentPage, setDebouncedParkName, states, designations }) => {
+const TableFilters = ({ debouncedParkName, states, designations }) => {
+  const [parkName, setParkName] = useState(debouncedParkName || '');
   const dispatch = useDispatch();
 
   const debouncedSearch = useMemo(
-    () =>
-      debounceFunction((val) => {
-        Promise.resolve().then((res) => {
-          ReactDOM.unstable_batchedUpdates(() => {
-            setCurrentPage(1);
-            setDebouncedParkName(val);
-          });
-        });
-      }, 750),
-    [setDebouncedParkName, setCurrentPage],
+    () => debounceFunction((val) => dispatch(setDebouncedParkName(val)), 750),
+    [dispatch],
   );
 
   const onInputChange = (e) => {

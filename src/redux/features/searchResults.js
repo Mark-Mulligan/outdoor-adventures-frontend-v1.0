@@ -12,6 +12,7 @@ const initialState = {
   resultLimit: 10,
   states: [],
   designations: [],
+  debouncedParkName: '',
 };
 
 export const searchResultsSlice = createSlice({
@@ -46,6 +47,10 @@ export const searchResultsSlice = createSlice({
       state.designations = action.payload;
       state.currentPage = 1;
     },
+    setDebouncedParkName: (state, action) => {
+      state.debouncedParkName = action.payload;
+      state.currentPage = 1;
+    },
   },
 });
 
@@ -59,6 +64,7 @@ export const {
   setSearchResults,
   setStatesFilter,
   setDesignationsFilter,
+  setDebouncedParkName,
 } = searchResultsSlice.actions;
 
 export default searchResultsSlice.reducer;

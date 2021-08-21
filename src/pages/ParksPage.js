@@ -34,17 +34,22 @@ const ParksPage = ({
   setShowInstructions,
   sortOrder,
   setSortOrder,
-  parkName,
-  setParkName,
-  debouncedParkName,
-  setDebouncedParkName,
-  setResultLimit,
   lastSearchUrl,
   setLastSearchUrl,
   history,
 }) => {
-  const { results, currentPage, totalPages, totalResults, dataStart, dataEnd, resultLimit, states, designations } =
-    useSelector((state) => state.searchResults);
+  const {
+    results,
+    currentPage,
+    totalPages,
+    totalResults,
+    dataStart,
+    dataEnd,
+    resultLimit,
+    states,
+    designations,
+    debouncedParkName,
+  } = useSelector((state) => state.searchResults);
 
   const dispatch = useDispatch();
 
@@ -92,23 +97,13 @@ const ParksPage = ({
         <h1>National Parks</h1>
       </TitleContainer>
       <TableComponentContainer>
-        <TableFilters
-          parkName={parkName}
-          setParkName={setParkName}
-          setDebouncedParkName={setDebouncedParkName}
-          states={states}
-          designations={designations}
-        />
+        <TableFilters debouncedParkName={debouncedParkName} states={states} designations={designations} />
         <Table
           history={history}
           columns={columns}
           data={results}
           showInstructions={showInstructions}
           setShowInstructions={setShowInstructions}
-          parkName={parkName}
-          setParkName={setParkName}
-          debouncedParkName={debouncedParkName}
-          setDebouncedParkName={setDebouncedParkName}
           states={states}
           designations={designations}
           totalResults={totalResults}
