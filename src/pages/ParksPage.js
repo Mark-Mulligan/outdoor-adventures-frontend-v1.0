@@ -69,15 +69,7 @@ const ParksPage = ({ showInstructions, setShowInstructions, history }) => {
 
   const dispatch = useDispatch();
 
-  const removeValsFromSelectObj = (inputData) => {
-    const result = [];
-    if (inputData.length >= 1) {
-      inputData.forEach((item) => {
-        result.push(item.value);
-      });
-    }
-    return result;
-  };
+  const removeValsFromSelectObj = (inputData) => inputData.map((item) => item.value);
 
   const getParksData = useCallback(
     async (page, limit, states, designation, parkQuery, sortOrder) => {
