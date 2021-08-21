@@ -30,9 +30,6 @@ const ParksPage = ({
   setParkName,
   debouncedParkName,
   setDebouncedParkName,
-  setStates,
-  setDesignations,
-  setCurrentPage,
   setResultLimit,
   lastSearchUrl,
   setLastSearchUrl,
@@ -99,15 +96,12 @@ const ParksPage = ({
         debouncedParkName={debouncedParkName}
         setDebouncedParkName={setDebouncedParkName}
         states={states}
-        setStates={setStates}
         designations={designations}
-        setDesignations={setDesignations}
         totalResults={totalResults}
         entryStart={dataStart}
         entryEnd={dataEnd}
         totalPages={totalPages}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
         resultLimit={resultLimit}
         setResultLimit={setResultLimit}
         sortOrder={sortOrder}

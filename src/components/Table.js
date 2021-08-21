@@ -72,17 +72,13 @@ const Table = ({
   setParkName,
   setDebouncedParkName,
   states,
-  setStates,
   designations,
-  setDesignations,
   totalResults,
   entryStart,
   entryEnd,
   totalPages,
   currentPage,
-  setCurrentPage,
   resultLimit,
-  setResultLimit,
   sortOrder,
   setSortOrder,
 }) => {
@@ -106,12 +102,9 @@ const Table = ({
         <TableFilters
           parkName={parkName}
           setParkName={setParkName}
-          setCurrentPage={setCurrentPage}
           setDebouncedParkName={setDebouncedParkName}
           states={states}
-          setStates={setStates}
           designations={designations}
-          setDesignations={setDesignations}
         />
       )}
 
@@ -160,9 +153,7 @@ const Table = ({
             entryEnd={entryEnd}
             totalPages={totalPages}
             currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
             resultLimit={resultLimit}
-            setResultLimit={setResultLimit}
           />
         )}
       </div>

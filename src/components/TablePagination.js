@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { nextPage, previousPage, jumpPage } from '../redux/features/searchResults';
+import { setResultLimit, nextPage, previousPage, jumpPage } from '../redux/features/searchResults';
 
 const CustomTableFooter = styled.section`
   background: rgba(205, 205, 205, 0.9);
@@ -53,15 +53,7 @@ const PaginationItem = styled.li`
   }
 `;
 
-const TablePagination = ({
-  totalResults,
-  entryStart,
-  entryEnd,
-  totalPages,
-  currentPage,
-  resultLimit,
-  setResultLimit,
-}) => {
+const TablePagination = ({ totalResults, entryStart, entryEnd, totalPages, currentPage, resultLimit }) => {
   const [pageBtnValues, setPageBtnValues] = useState([]);
 
   const dispatch = useDispatch();
@@ -100,7 +92,7 @@ const TablePagination = ({
             id="results-per-page-select"
             value={resultLimit}
             className="form-select"
-            onChange={(e) => setResultLimit(e.target.value)}
+            onChange={(e) => dispatch(setResultLimit(e.target.value))}
           >
             <option value={10}>10</option>
             <option value={20}>20</option>

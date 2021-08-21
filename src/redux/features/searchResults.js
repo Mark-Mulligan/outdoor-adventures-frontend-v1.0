@@ -27,6 +27,9 @@ export const searchResultsSlice = createSlice({
     jumpPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    setResultLimit: (state, action) => {
+      state.resultLimit = action.payload;
+    },
     setSearchResults: (state, action) => {
       state.results = formatTableData(action.payload.results);
       state.currentPage = action.payload.currentPage;
@@ -48,7 +51,14 @@ export const searchResultsSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 
-export const { nextPage, previousPage, jumpPage, setSearchResults, setStatesFilter, setDesignationsFilter } =
-  searchResultsSlice.actions;
+export const {
+  nextPage,
+  previousPage,
+  jumpPage,
+  setResultLimit,
+  setSearchResults,
+  setStatesFilter,
+  setDesignationsFilter,
+} = searchResultsSlice.actions;
 
 export default searchResultsSlice.reducer;
