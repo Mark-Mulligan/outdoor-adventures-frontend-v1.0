@@ -1,26 +1,7 @@
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
-const TableInstructions = styled.div`
-  display: ${(props) => (props.showInstructions ? 'block' : 'none')};
-  max-width: 700px;
-  margin: 0 auto 1.5rem auto;
-  text-align: center;
-  background: rgb(245, 245, 245);
-  padding: 7px;
-  border-radius: 5px;
-  position: relative;
-`;
-
-const InstructionsToggle = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
-  background: none;
-  font-size: 20px;
-  padding-right: 5px;
-  padding-left: 5px;
-`;
+import { setSortOrder } from '../redux/features/searchResults';
 
 const CustomTableHead = styled.thead`
   :hover {
@@ -52,14 +33,16 @@ const renderCells = (item, rowIndex, columns) => {
   });
 };
 
-const Table = ({ history, columns, data, showInstructions, setShowInstructions, sortOrder, setSortOrder }) => {
+const Table = ({ history, columns, data, sortOrder }) => {
+  const dispatch = useDispatch();
+
   const onTableColClick = (columnVal) => {
     if (sortOrder === `${columnVal}-desc`) {
-      setSortOrder('');
+      dispatch(setSortOrder(''));
     } else if (sortOrder === `${columnVal}-asc`) {
-      setSortOrder(`${columnVal}-desc`);
+      dispatch(setSortOrder(`${columnVal}-desc`));
     } else {
-      setSortOrder(`${columnVal}-asc`);
+      dispatch(setSortOrder(`${columnVal}-asc`));
     }
   };
 
@@ -68,47 +51,39 @@ const Table = ({ history, columns, data, showInstructions, setShowInstructions, 
   };
 
   return (
-    <>
-      <TableInstructions showInstructions={showInstructions}>
-        <InstructionsToggle onClick={() => setShowInstructions(!showInstructions)}>&times;</InstructionsToggle>
-        <p className="mb-0">Click on a park in the table to see detailed infomation .</p>
-      </TableInstructions>
-      <div style={{ overflow: 'auto' }}>
-        <table className="table mb-0" style={{ minWidth: '650px' }}>
-          <CustomTableHead>
-            <tr>
-              {columns.map((col) => (
-                <th scope="col" key={col.accessor} onClick={() => onTableColClick(col.accessor)}>
-                  <NoBreakSpan>
-                    {col.name}
-                    {sortOrder === `${col.accessor}-asc` && (
-                      <i className="fas fa-sort-down" style={{ marginLeft: '5px' }}></i>
-                    )}
-                    {sortOrder === `${col.accessor}-desc` && (
-                      <i className="fas fa-sort-up" style={{ marginLeft: '5px' }}></i>
-                    )}
-                  </NoBreakSpan>
-                </th>
-              ))}
-            </tr>
-          </CustomTableHead>
+    <table className="table mb-0" style={{ minWidth: '650px' }}>
+      <CustomTableHead>
+        <tr>
+          {columns.map((col) => (
+            <th scope="col" key={col.accessor} onClick={() => onTableColClick(col.accessor)}>
+              <NoBreakSpan>
+                {col.name}
+                {sortOrder === `${col.accessor}-asc` && (
+                  <i className="fas fa-sort-down" style={{ marginLeft: '5px' }}></i>
+                )}
+                {sortOrder === `${col.accessor}-desc` && (
+                  <i className="fas fa-sort-up" style={{ marginLeft: '5px' }}></i>
+                )}
+              </NoBreakSpan>
+            </th>
+          ))}
+        </tr>
+      </CustomTableHead>
 
-          <tbody>
-            {data.map((item, rowIndex) => {
-              return rowIndex % 2 === 0 ? (
-                <LightCustomTableRow onClick={() => onTableRowClick(item.parkcode)} key={`row-${rowIndex}`}>
-                  {renderCells(item, rowIndex, columns)}
-                </LightCustomTableRow>
-              ) : (
-                <CustomTableRow onClick={() => onTableRowClick(item.parkcode)} key={`row-${rowIndex}`}>
-                  {renderCells(item, rowIndex, columns)}
-                </CustomTableRow>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </>
+      <tbody>
+        {data.map((item, rowIndex) => {
+          return rowIndex % 2 === 0 ? (
+            <LightCustomTableRow onClick={() => onTableRowClick(item.parkcode)} key={`row-${rowIndex}`}>
+              {renderCells(item, rowIndex, columns)}
+            </LightCustomTableRow>
+          ) : (
+            <CustomTableRow onClick={() => onTableRowClick(item.parkcode)} key={`row-${rowIndex}`}>
+              {renderCells(item, rowIndex, columns)}
+            </CustomTableRow>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

@@ -13,6 +13,8 @@ const initialState = {
   states: [],
   designations: [],
   debouncedParkName: '',
+  sortOrder: '',
+  lastApiRequestStr: '',
 };
 
 export const searchResultsSlice = createSlice({
@@ -51,6 +53,13 @@ export const searchResultsSlice = createSlice({
       state.debouncedParkName = action.payload;
       state.currentPage = 1;
     },
+    setSortOrder: (state, action) => {
+      state.sortOrder = action.payload;
+      state.currentPage = 1;
+    },
+    setLastApiRequestStr: (state, action) => {
+      state.lastApiRequestStr = action.payload;
+    },
   },
 });
 
@@ -65,6 +74,8 @@ export const {
   setStatesFilter,
   setDesignationsFilter,
   setDebouncedParkName,
+  setSortOrder,
+  setLastApiRequestStr,
 } = searchResultsSlice.actions;
 
 export default searchResultsSlice.reducer;

@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setSearchResults } from '../redux/features/searchResults';
+import { setLastApiRequestStr, setSearchResults } from '../redux/features/searchResults';
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
 import TableFilters from '../components/TableFilters';
@@ -29,15 +29,29 @@ const TableComponentContainer = styled.div`
   margin: auto;
 `;
 
-const ParksPage = ({
-  showInstructions,
-  setShowInstructions,
-  sortOrder,
-  setSortOrder,
-  lastSearchUrl,
-  setLastSearchUrl,
-  history,
-}) => {
+const TableInstructions = styled.div`
+  display: ${(props) => (props.showInstructions ? 'block' : 'none')};
+  max-width: 700px;
+  margin: 0 auto 1.5rem auto;
+  text-align: center;
+  background: rgb(245, 245, 245);
+  padding: 7px;
+  border-radius: 5px;
+  position: relative;
+`;
+
+const InstructionsToggle = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background: none;
+  font-size: 20px;
+  padding-right: 5px;
+  padding-left: 5px;
+`;
+
+const ParksPage = ({ showInstructions, setShowInstructions, history }) => {
   const {
     results,
     currentPage,
@@ -49,6 +63,8 @@ const ParksPage = ({
     states,
     designations,
     debouncedParkName,
+    sortOrder,
+    lastApiRequestStr,
   } = useSelector((state) => state.searchResults);
 
   const dispatch = useDispatch();
@@ -71,12 +87,12 @@ const ParksPage = ({
       if (parkQuery) apiRequestStr += `&q=${parkQuery}`;
       if (sortOrder) apiRequestStr += `&order=${sortOrder}`;
 
-      if (apiRequestStr !== lastSearchUrl) {
+      if (apiRequestStr !== lastApiRequestStr) {
         try {
           const { data, status } = await axios.get(apiRequestStr);
           console.log(data);
           if (status === 200) {
-            setLastSearchUrl(apiRequestStr);
+            dispatch(setLastApiRequestStr(apiRequestStr));
             dispatch(setSearchResults(data));
           }
         } catch (error) {
@@ -84,7 +100,7 @@ const ParksPage = ({
         }
       }
     },
-    [setLastSearchUrl, lastSearchUrl, dispatch],
+    [dispatch, lastApiRequestStr],
   );
 
   useEffect(() => {
@@ -98,31 +114,34 @@ const ParksPage = ({
       </TitleContainer>
       <TableComponentContainer>
         <TableFilters debouncedParkName={debouncedParkName} states={states} designations={designations} />
-        <Table
-          history={history}
-          columns={columns}
-          data={results}
-          showInstructions={showInstructions}
-          setShowInstructions={setShowInstructions}
-          states={states}
-          designations={designations}
-          totalResults={totalResults}
-          entryStart={dataStart}
-          entryEnd={dataEnd}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          resultLimit={resultLimit}
-          sortOrder={sortOrder}
-          setSortOrder={setSortOrder}
-        />
-        <TablePagination
-          totalResults={totalResults}
-          entryStart={dataStart}
-          entryEnd={dataEnd}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          resultLimit={resultLimit}
-        />
+        <TableInstructions showInstructions={showInstructions}>
+          <InstructionsToggle onClick={() => setShowInstructions(!showInstructions)}>&times;</InstructionsToggle>
+          <p className="mb-0">Click on a park in the table to see detailed infomation .</p>
+        </TableInstructions>
+        <div style={{ overflow: 'auto' }}>
+          <Table
+            history={history}
+            columns={columns}
+            data={results}
+            states={states}
+            designations={designations}
+            totalResults={totalResults}
+            entryStart={dataStart}
+            entryEnd={dataEnd}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            resultLimit={resultLimit}
+            sortOrder={sortOrder}
+          />
+          <TablePagination
+            totalResults={totalResults}
+            entryStart={dataStart}
+            entryEnd={dataEnd}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            resultLimit={resultLimit}
+          />
+        </div>
       </TableComponentContainer>
     </FullPageBackground>
   );

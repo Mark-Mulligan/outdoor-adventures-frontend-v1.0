@@ -12,8 +12,6 @@ function App() {
   const [apiUp, setApiUp] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
   const [googleMapsKey, setGoogleMapsKey] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  const [lastSearchUrl, setLastSearchUrl] = useState('');
 
   const checkApiOnline = useCallback(async () => {
     try {
@@ -42,15 +40,7 @@ function App() {
         exact
         path="/parks"
         render={(props) => (
-          <ParksPage
-            {...props}
-            showInstructions={showInstructions}
-            setShowInstructions={setShowInstructions}
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
-            lastSearchUrl={lastSearchUrl}
-            setLastSearchUrl={setLastSearchUrl}
-          />
+          <ParksPage {...props} showInstructions={showInstructions} setShowInstructions={setShowInstructions} />
         )}
       />
       <Route exact path="/parks/:parkcode" render={(props) => <ParkPage {...props} googleMapsKey={googleMapsKey} />} />
