@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchResults } from '../redux/features/searchResults';
 import mountainBackground from '../images/mountainForestBackground-min.jpg';
 import Table from '../components/Table';
+import TableFilters from '../components/TableFilters';
+import TablePagination from '../components/TablePagination';
+
 import FullPageBackground from '../components/FullPageBackground';
 
 const columns = [
@@ -19,6 +22,11 @@ const TitleContainer = styled.div`
   text-align: center;
   margin-top: 10px;
   color: rgba(255, 255, 255);
+`;
+
+const TableComponentContainer = styled.div`
+  max-width: 1500px;
+  margin: auto;
 `;
 
 const ParksPage = ({
@@ -83,30 +91,44 @@ const ParksPage = ({
       <TitleContainer>
         <h1>National Parks</h1>
       </TitleContainer>
-      <Table
-        history={history}
-        columns={columns}
-        data={results}
-        showInstructions={showInstructions}
-        setShowInstructions={setShowInstructions}
-        pagination
-        filters
-        parkName={parkName}
-        setParkName={setParkName}
-        debouncedParkName={debouncedParkName}
-        setDebouncedParkName={setDebouncedParkName}
-        states={states}
-        designations={designations}
-        totalResults={totalResults}
-        entryStart={dataStart}
-        entryEnd={dataEnd}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        resultLimit={resultLimit}
-        setResultLimit={setResultLimit}
-        sortOrder={sortOrder}
-        setSortOrder={setSortOrder}
-      />
+      <TableComponentContainer>
+        <TableFilters
+          parkName={parkName}
+          setParkName={setParkName}
+          setDebouncedParkName={setDebouncedParkName}
+          states={states}
+          designations={designations}
+        />
+        <Table
+          history={history}
+          columns={columns}
+          data={results}
+          showInstructions={showInstructions}
+          setShowInstructions={setShowInstructions}
+          parkName={parkName}
+          setParkName={setParkName}
+          debouncedParkName={debouncedParkName}
+          setDebouncedParkName={setDebouncedParkName}
+          states={states}
+          designations={designations}
+          totalResults={totalResults}
+          entryStart={dataStart}
+          entryEnd={dataEnd}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          resultLimit={resultLimit}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+        />
+        <TablePagination
+          totalResults={totalResults}
+          entryStart={dataStart}
+          entryEnd={dataEnd}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          resultLimit={resultLimit}
+        />
+      </TableComponentContainer>
     </FullPageBackground>
   );
 };

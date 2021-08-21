@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-import TableFilters from './TableFilters';
-import TablePagination from './TablePagination';
-
-const TableComponentContainer = styled.div`
-  max-width: 1500px;
-  margin: auto;
-`;
-
 const TableInstructions = styled.div`
   display: ${(props) => (props.showInstructions ? 'block' : 'none')};
   max-width: 700px;
@@ -60,28 +52,7 @@ const renderCells = (item, rowIndex, columns) => {
   });
 };
 
-const Table = ({
-  history,
-  columns,
-  data,
-  showInstructions,
-  setShowInstructions,
-  pagination,
-  filters,
-  parkName,
-  setParkName,
-  setDebouncedParkName,
-  states,
-  designations,
-  totalResults,
-  entryStart,
-  entryEnd,
-  totalPages,
-  currentPage,
-  resultLimit,
-  sortOrder,
-  setSortOrder,
-}) => {
+const Table = ({ history, columns, data, showInstructions, setShowInstructions, sortOrder, setSortOrder }) => {
   const onTableColClick = (columnVal) => {
     if (sortOrder === `${columnVal}-desc`) {
       setSortOrder('');
@@ -97,17 +68,7 @@ const Table = ({
   };
 
   return (
-    <TableComponentContainer>
-      {filters && (
-        <TableFilters
-          parkName={parkName}
-          setParkName={setParkName}
-          setDebouncedParkName={setDebouncedParkName}
-          states={states}
-          designations={designations}
-        />
-      )}
-
+    <>
       <TableInstructions showInstructions={showInstructions}>
         <InstructionsToggle onClick={() => setShowInstructions(!showInstructions)}>&times;</InstructionsToggle>
         <p className="mb-0">Click on a park in the table to see detailed infomation .</p>
@@ -146,18 +107,8 @@ const Table = ({
             })}
           </tbody>
         </table>
-        {pagination && (
-          <TablePagination
-            totalResults={totalResults}
-            entryStart={entryStart}
-            entryEnd={entryEnd}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            resultLimit={resultLimit}
-          />
-        )}
       </div>
-    </TableComponentContainer>
+    </>
   );
 };
 
