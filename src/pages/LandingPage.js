@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import OpaqueContainer from '../components/OpaqueContainer';
 import FullPageBackground from '../components/FullPageBackground';
-import mountainBackground from '../images/mountainForestBackground-min.jpg';
+import mountainBackground from '../images/mountainForestMin.jpg';
 
 const LandingPage = () => {
   return (

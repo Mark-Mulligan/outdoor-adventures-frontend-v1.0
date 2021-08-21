@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setLastApiRequestStr, setSearchResults } from '../redux/features/searchResults';
-import mountainBackground from '../images/mountainForestBackground-min.jpg';
+import mountainBackground from '../images/mountainForestMin.jpg';
 import Table from '../components/Table';
 import TableFilters from '../components/TableFilters';
 import TablePagination from '../components/TablePagination';

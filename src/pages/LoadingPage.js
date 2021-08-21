@@ -1,6 +1,6 @@
 import PulseLoader from 'react-spinners/PulseLoader';
 
-import cliffsAndRoad from '../images/cliffsAndRoad.jpg';
+import cliffsAndRoad from '../images/cliffsAndRoadMin.jpg';
 import OpaqueContainer from '../components/OpaqueContainer';
 import FullPageBackground from '../components/FullPageBackground';
 

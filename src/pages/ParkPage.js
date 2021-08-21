@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import RingLoader from 'react-spinners/RingLoader';
 
-import mountainBackground from '../images/mountainForestBackground-min.jpg';
+import mountainBackground from '../images/mountainForestMin.jpg';
 import FullPageBackground from '../components/FullPageBackground';
 import ParkInfoNav from '../components/ParkInfoNav';
 import ParkDescription from '../components/ParkDescription';
