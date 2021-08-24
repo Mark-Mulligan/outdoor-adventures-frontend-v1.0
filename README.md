@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Outdoor Adventures
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="./readmeImages/appOverview.jpg" alt="Picture of Application's main page" width="500px" height="250px">
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+I am an active person and always enjoyed spending time outdoors. I designed this application to help search through and find detailed information on all the national parks in the United States.
 
-### `yarn start`
+While building this project, I was able to incorporate a lot of different programming concepts that I wanted to explore. This project features server side pagination, redux state management and using library styled components to handle all css styling and complying. It is a fully stack application that is completly responsive.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### View the Project Live <br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+https://outdoor-adventures1.netlify.app/
 
-### `yarn test`
+#### Built With
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Redux (using [Redux Toolkit](https://redux-toolkit.js.org/))
+- [Styled Components](https://styled-components.com/)
+- React.js
+- Node.js (Express framework)
+- MySQL
+- Bootstrap
+- [React Google Maps](https://www.npmjs.com/package/@react-google-maps/api)
+- National Parks API
 
-### `yarn build`
+## Technical Overview
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Server Side Pagination
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+One of the key features of this project is that the main park page features server side pagination and search filitering. I have a lot of experience with doing pagination and filtering on the front end only, but this gave me the oppourtunity to do that same functionality on the backend. This is useful in business applications because most businesses are working with very large data sets. Thus, the structure of this project could be easily scaled to work with a much larger set of data without effecting the user experience.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Redux
 
-### `yarn eject`
+I used redux as a tool to help simplify my application. This allow me to send data to child components within the application without have to prop drill down to them and kept the main app component much more readiable.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Styled Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I am familar with using css to style my components, but I wanted to try out styled componets as a way to combined my styling into the componets them selves (without having to have extra css files for styling). After building this project, I really enjoy using styled components. It is very straight forward and offers lots of advantages over simply using plain css for styled your components such as descresing file sizes, allow you to more easily work with variables in your application, and keeping your styling in the same file as your react component. Since it generates unique classnames, you won't have to worry about accidentally styling something in a large application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### No Down time
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+With this application, I handled all asynchronous tasks with loading screens so the user is always engaged with the page. It makes the app appear to work faster and looks more professional.
 
-## Learn More
+## Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Park Search
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- This page has a table with all the national parks in the United States. You can search for a specific national park along with using search filters by state and park designation.
 
-### Code Splitting
+<img src="./readmeImages/appOverview.jpg" alt="national park table" width="600px" height="150px">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Park Info Page
 
-### Analyzing the Bundle Size
+- Has detailed information on the park you selected including a description, entrance fees, park hours, activites, location, contact info, and images from that park.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img src="./readmeImages/parkDetail.jpg" alt="Individual park info page" width="600px" height="150px">
 
-### Making a Progressive Web App
+## Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+[Backend Github Page](https://github.com/Mark-Mulligan/outdoor-adventures-backend-v1.0)
 
-### Advanced Configuration
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[My Github](https://github.com/Mark-Mulligan) || mark.mulligan.jr1@gmail.com
 
-### Deployment
+#### How to Contact Me
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Feel free to reach out to me if you have any questions about this project. You can email me using the email listed above or can go to my github page to view my other projects and portfolio.
 
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+© Mark Mulligan 2021 All Rights Reserved.
