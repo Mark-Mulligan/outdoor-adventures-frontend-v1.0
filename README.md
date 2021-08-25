@@ -47,13 +47,13 @@ With this application, I handled all asynchronous tasks with loading screens so 
 
 - This page has a table with all the national parks in the United States. You can search for a specific national park along with using search filters by state and park designation.
 
-<img src="./readmeImages/appOverview.jpg" alt="national park table" width="600px" height="150px">
+<img src="./readmeImages/appOverview.jpg" alt="national park table" width="500px" height="250px">
 
 #### Park Info Page
 
 - Has detailed information on the park you selected including a description, entrance fees, park hours, activites, location, contact info, and images from that park.
 
-<img src="./readmeImages/parkDetail.jpg" alt="Individual park info page" width="600px" height="150px">
+<img src="./readmeImages/parkDetail.jpg" alt="Individual park info page" width="500px" height="250px">
 
 ## Backend
 
