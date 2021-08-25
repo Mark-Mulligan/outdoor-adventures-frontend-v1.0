@@ -35,7 +35,7 @@ I used redux as a tool to help simplify my application. This allow me to send da
 
 #### Styled Components
 
-I am familar with using css to style my components, but I wanted to try out styled componets as a way to combined my styling into the componets them selves (without having to have extra css files for styling). After building this project, I really enjoy using styled components. It is very straight forward and offers lots of advantages over simply using plain css for styled your components such as descresing file sizes, allow you to more easily work with variables in your application, and keeping your styling in the same file as your react component. Since it generates unique classnames, you won't have to worry about accidentally styling something in a large application.
+I am familar with using css to style my components, but I wanted to try out styled componets as a way to combine my styling into the componets them selves (without having to have extra css files for styling). After building this project, I really enjoy using styled components. It is very straight forward and offers lots of advantages over simply using plain css for styled your components such as descresing file sizes, allow you to more easily work with variables in your application, and keeping your styling in the same file as your react component. Since it generates unique classnames, you won't have to worry about accidentally styling something in a large application.
 
 #### No Down time
 
