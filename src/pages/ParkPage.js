@@ -90,8 +90,6 @@ const ParkPage = ({ googleMapsKey }) => {
       backgroundImg={mountainBackground}
       paddingTop={setPadding(windowWidth)}
       paddingBottom={setPadding(windowWidth)}
-      paddingLeft={windowWidth <= 500 ? '0px' : '15px'}
-      paddingRight={windowWidth <= 500 ? '0px' : '15px'}
     >
       {windowWidth <= 900 && <MobileParkNav />}
       <ParkInfoContainer>

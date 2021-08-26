@@ -90,7 +90,7 @@ const MobileParkNav = () => {
         </li>
         <li>
           <NavLink href="#location" onClick={handleMenuClick}>
-            location
+            Location
           </NavLink>
         </li>
         <li>

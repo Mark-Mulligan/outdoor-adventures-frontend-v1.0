@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setResultLimit, nextPage, previousPage, jumpPage } from '../redux/features/searchResults';
 
+import { getWindowWidth } from '../utils/uilt';
+
 const CustomTableFooter = styled.section`
   background: rgba(205, 205, 205, 0.9);
   width: 100%;
@@ -24,7 +26,7 @@ const PaginationControlsContainer = styled.div`
 
 const Col = styled.div`
   margin: 15px;
-  @media (max-width: 390px) {
+  @media (max-width: 380px) {
     margin-left: 5px;
   }
 `;
@@ -36,7 +38,7 @@ const ColStyled = styled(Col)`
 
 const Col3 = styled.nav`
   margin: 15px;
-  @media (max-width: 390px) {
+  @media (max-width: 380px) {
     margin-left: 5px;
   }
 `;
@@ -44,21 +46,15 @@ const Col3 = styled.nav`
 const PaginationItem = styled.li`
   display: flex;
   align-items: center;
-  @media (max-width: 390px) {
-    font-size: 0.7rem;
-  }
-
-  @media (max-width: 338px) {
-    font-size: 0.55rem;
-  }
 `;
 
 const TablePagination = ({ totalResults, entryStart, entryEnd, totalPages, currentPage, resultLimit }) => {
   const [pageBtnValues, setPageBtnValues] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
 
   const dispatch = useDispatch();
 
-  const getPageBtnValues = useCallback(() => {
+  const paginationLargeSceens = useCallback(() => {
     if (totalPages > 7 && currentPage < 5) {
       setPageBtnValues([1, 2, 3, 4, 5, '...', totalPages]);
     } else if (totalPages > 7 && currentPage > totalPages - 4) {
@@ -72,7 +68,39 @@ const TablePagination = ({ totalResults, entryStart, entryEnd, totalPages, curre
       }
       setPageBtnValues(result);
     }
-  }, [currentPage, totalPages]);
+  }, [totalPages, currentPage]);
+
+  const paginationSmallScreens = useCallback(() => {
+    if (totalPages > 7 && currentPage < 3) {
+      setPageBtnValues([1, 2, 3, '...', totalPages]);
+    } else if (totalPages > 7 && currentPage > totalPages - 2) {
+      setPageBtnValues([1, '...', totalPages - 2, totalPages - 1, totalPages]);
+    } else if (totalPages > 7) {
+      setPageBtnValues([1, '...', currentPage, '...', totalPages]);
+    } else {
+      let result = [];
+      for (let i = 1; i <= totalPages; i++) {
+        result.push(i);
+      }
+      setPageBtnValues(result);
+    }
+  }, [totalPages, currentPage]);
+
+  const getPageBtnValues = useCallback(() => {
+    if (windowWidth < 370) {
+      paginationSmallScreens();
+    } else {
+      paginationLargeSceens();
+    }
+  }, [paginationSmallScreens, paginationLargeSceens, windowWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(getWindowWidth());
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     getPageBtnValues();

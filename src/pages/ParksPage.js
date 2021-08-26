@@ -9,7 +9,6 @@ import Table from '../components/Table';
 import TableFilters from '../components/TableFilters';
 import TablePagination from '../components/TablePagination';
 import ConfirmModal from '../components/ConfirmModal';
-
 import FullPageBackground from '../components/FullPageBackground';
 
 const columns = [
