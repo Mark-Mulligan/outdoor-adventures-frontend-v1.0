@@ -77,7 +77,7 @@ const ParksPage = ({ history }) => {
   }, [getParksData, currentPage, resultLimit, states, designations, debouncedParkName, sortOrder]);
 
   return (
-    <FullPageBackground backgroundImg={mountainBackground} paddingBottom="60px">
+    <FullPageBackground backgroundImg={mountainBackground} paddingBottom="70px">
       <TitleContainer>
         <h1>National Parks</h1>
       </TitleContainer>
